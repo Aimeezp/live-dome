@@ -64,8 +64,12 @@
           </van-checkbox> 
           <div class="VIPlet" @click="YFTSWV()">?</div>
           <div class="musof" v-if="phoneShowSWV">
-            <div class="mustitle">请输入已注册的SWV 会员账号</div>
-            <input type="text" v-model="inputPhone" :placeholder="phone" class="inputcount">
+            <div class="mustitle">请输入已注册的SWV 会员账号 <span class="chaxun" style="color:red;text-decoration: underline" @click="clickcheckswv" v-show="showcanuseSWV">查询资产</span></div>
+            <input type="text" v-model="inputPhone" :placeholder="phone" class="inputcount" v-on:input="change">
+            <div class="canuseAsset" v-show="showcanuseSWV">
+              <span>授权信用：{{frzzedSWV}}</span>
+              <span class="sencondcontent">可用：{{canuseSWV}}</span>
+            </div>
           </div>
         </div>
 
@@ -100,6 +104,7 @@ import axios from 'axios'
 import dialogs from '../../components/dialogs2';
 import dialogs3 from '../../components/dialogs3';
 import dialogs4 from '../../components/dialogs4';
+
 export default {
   name: "",
   data() {
@@ -112,6 +117,9 @@ export default {
       inputAccount:'',
       productId:'',
       inputPlace:'请输入认购数量',
+      canuseSWV:0,
+      frzzedSWV:0,
+      showcanuseSWV:false,
       minProductProceeds:'0.00',
       maxProductProceeds:'',
       productSurplus:'--',
@@ -159,6 +167,45 @@ export default {
   methods: {
     goBack() {
       this.$router.go(-1);
+    },
+    change(){
+      var reg=11 && /^((13|14|15|17|18)[0-9]{1}\d{8})$/;
+      var regEmail = /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+      if(reg.test(this.inputPhone) || regEmail.test(this.inputPhone)){
+        this.showcanuseSWV = true
+      }
+      else
+      this.showcanuseSWV = false
+    },
+    clickcheckswv(){
+      if(this.inputPhone == ''){
+          dialogs.install({
+            title: '请输入已注册的Munics/SWV会员账号',
+          });
+          return false
+        }
+
+        this.showcanuseSWV = true
+        this.checkSWVCount();
+    },
+    checkSWVCount(){
+      let data = {
+        account:this.inputPhone
+      }
+      this.$ajax.post('/partner/swv/balance', data,{
+        headers: {
+          'Content-Type': 'application/json;charset=UTF-8'
+        },
+      }).then( res => {
+        if (res.data.success == true) {
+          this.canuseSWV = res.data.body.usableAmount
+          this.frzzedSWV = res.data.body.creditAmount
+        }
+      }).catch(err=>{
+
+      }).then(() => {
+
+      })
     },
     getConterHeight(){
       if(this.heightFlag){
@@ -261,7 +308,7 @@ export default {
       if(this.checked == true){
         if(this.inputPhone == ''){
           dialogs.install({
-            title: '请输入已注册的Munics 会员账号',
+            title: '请输入已注册的Munics/SWV会员账号',
           });
           return false
         }
@@ -272,6 +319,7 @@ export default {
       });
     },
     orderCreate(){
+      this.showcanuseSWV = false;
       let productId = this.productId
       let inputAccount = this.inputAccount
       let item = {
@@ -360,6 +408,7 @@ export default {
         this.checkedSWV = false
         this.phoneShowSWV = false
         this.symbolSWV = "0.00"
+        this.showcanuseSWV = false;
       }else{
         this.symbol = '0.00'
         this.isExtend = 2 
@@ -662,6 +711,7 @@ export default {
     color: #fff;
     margin-top: 3px;
   }
+
   .checksbox{
     position: relative;
     width: 90%;
@@ -675,7 +725,17 @@ export default {
     padding: 20px;
     .mustitle{
       color: #fff;
-      opacity: .4;
+    }
+    .canuseAsset{
+      margin-top: 1rem;
+      color: red;
+      .sencondcontent{
+        margin-left: 2rem;
+      }
+    }
+    .chaxun{
+      color: red;
+      margin-left: 3rem;
     }
     input{
       line-height: 35px;
