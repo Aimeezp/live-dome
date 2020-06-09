@@ -5,9 +5,6 @@
           <div class="top-bar al">
               <img class="back" @click="goBack" src="../../../static/back.png" alt srcset>
               <div class="left">赎回</div>
-              <div class="right">
-                  <img src="" alt="">
-              </div>
           </div>
       </div>
 
@@ -223,6 +220,7 @@ export default {
         width: 100%;
         height: auto;
         text-align: center;
+        margin-right: 1.2rem;
       }
       .right {
         img {

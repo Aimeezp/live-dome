@@ -9,9 +9,6 @@
         <div class="top-bar al">
             <img class="back" @click="goBack" src="../../../static/back.png" alt srcset>
             <div class="left">BSS全球合伙人</div>
-            <div class="right">
-                <img src="" alt="">
-            </div>
         </div>
     </div>
     <div class="convert-body" v-if="productList.length">
@@ -294,6 +291,7 @@ export default {
         width: 100%;
         height: auto;
         text-align: center;
+        margin-right: 1.2rem;
       }
       .right {
         img {

@@ -3,7 +3,7 @@ import cookies from 'js-cookie';
 var logined = !!cookies.get('logined');
 
 let list = [
-  'home','inviteList','rewardRecordList','suocangDetail','suocangandjiedetail','suocangandRedeem','zhuanchuRedeem','suocangList','suocangandjieList'
+  'home','inviteList','rewardRecordList','zcpartner','enterzd','suocangDetail','suocangandjiedetail','suocangandRedeem','zhuanchuRedeem','suocangList','suocangandjieList'
 ];
 router.beforeEach((to, from, next) => {
   // console.log(to)

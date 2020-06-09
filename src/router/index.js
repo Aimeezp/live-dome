@@ -19,6 +19,8 @@ import suocangandRedeem from '@/views/home/suocangandRedeem'
 import zhuanchuRedeem from '@/views/home/zhuanchuRedeem'
 import suocangList from '@/views/home/suocangList'
 import suocangandjieList from '@/views/home/suocangandjieList'
+import zcpartner from '@/views/home/zcpartner'
+import enterzd from '@/views/home/enterzd'
 
 Vue.use(Router)
 
@@ -99,6 +101,24 @@ export default new Router({
       path:'/suocangandjieList',
       name:'suocangandjieList',
       component:suocangandjieList,
+      meta:{
+        index:4,
+        footer:false
+      }
+    },
+    {
+      path:'/zcpartner',
+      name:'zcpartner',
+      component:zcpartner,
+      meta:{
+        index:4,
+        footer:false
+      }
+    },
+    {
+      path:'/enterzd/:id',
+      name:'enterzd',
+      component:enterzd,
       meta:{
         index:4,
         footer:false

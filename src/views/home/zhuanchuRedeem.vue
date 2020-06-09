@@ -5,9 +5,6 @@
           <div class="top-bar al">
               <img class="back" @click="goBack" src="../../../static/back.png" alt srcset>
               <div class="left">转出</div>
-              <div class="right">
-                  <img src="" alt="">
-              </div>
           </div>
       </div>
 
@@ -212,6 +209,7 @@ export default {
         color: rgba(255, 255, 255, 1);
         width: 100%;
         height: auto;
+        margin-right: 1.2rem;
         text-align: center;
       }
       .right {

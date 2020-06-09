@@ -6,9 +6,6 @@
           <div class="top-bar al">
               <img class="back" @click="goBack" src="../../../static/back.png" alt srcset>
               <div class="left">资产</div>
-              <div class="right">
-                  <img src="" alt="">
-              </div>
           </div>
       </div>
       <div class="topContent_Assets">
@@ -18,8 +15,13 @@
           </div>
 
           <div class="Assets_Item">
-              <span class="Assets_Title">锁仓资产</span>
+              <span class="Assets_Title">合伙人锁仓资产</span>
               <span class="Assets_Account">{{balanceByLock}} <span class="ass_wei">BSS</span></span>
+          </div>
+
+          <div class="Assets_Item">
+              <span class="Assets_Title">创世众筹锁仓资产</span>
+              <span class="Assets_Account">{{chuangshiLock}} <span class="ass_wei">BSS</span></span>
           </div>
 
           <div class="Assets_Item1">
@@ -155,6 +157,7 @@ export default {
       productList:[],
       balanceByAll:'',
       balanceByLock:'',
+      chuangshiLock:'',
       incomeByAll:'',
       heightFlag: true,
       heightStatus:1,
@@ -288,6 +291,7 @@ export default {
       }).then( res => {
         this.balanceByAll = res.data.body.balanceByAll
         this.balanceByLock = res.data.body.balanceByLock
+        this.chuangshiLock = res.data.body.balanceTeamByLock
         this.incomeByAll = res.data.body.incomeByAll
       }).catch(err=>{
 
@@ -364,6 +368,7 @@ export default {
         width: 100%;
         height: auto;
         text-align: center;
+        margin-right: 1.2rem;
       }
       .right {
         img {
@@ -561,7 +566,7 @@ export default {
         margin-top: 5rem;
         margin-left: 2rem;
         flex-direction: row;
-        line-height: 2rem;
+        line-height: 1.7rem;
         .Assets_Item{
             color: white;
             display: block;
@@ -607,6 +612,7 @@ export default {
       line-height: 3rem;
       display: flex;
       margin: 0 auto;
+      margin-top: 1rem;
       flex-direction: row;
       margin-left: calc(3%);
       background-color: #1a1b30;
@@ -711,7 +717,7 @@ export default {
       width: 94%;
       overflow-y: scroll;
       position: fixed;
-      top: 15rem;
+      top: 15.6rem;
       bottom: 4rem;
       left: 3%;
       right: 0;

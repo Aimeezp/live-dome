@@ -4,53 +4,31 @@
       <div class="scrollConter">
           <div class="top-bar al">
               <img class="back" @click="goBack" src="../../../static/back.png" alt srcset>
-              <div class="left">BSS认购</div>
+              <div class="left">加入战队</div>
+
           </div>
       </div>
 
       <div class="top-content">
-        <div v-for="item in productPrice">
-          <div class="coindetail"> 
-            <div class="colossaa">
-              <img :src="item.productLogo" alt="" v-if="item.productLogo">
+        
+        <div class="itemdetail">
+            <img :src="signIconSrc[Picindex]" alt="">
+            <div class="sencondco">
+                <div class="title1">{{productTitle}}</div>
+                <div class="title2">已众筹资金</div>
+                <div class="title3">{{distributeNumber}}{{distributeCoin}}</div>
             </div>
-            <div class="right-content">
-              <div class="title-des">{{item.productTitle}}</div>
+            <div class="thirdco">
+                <div class="title11">参与人数</div>
+                <div class="title22">{{subscribeNumber}}</div>
             </div>
-          </div>
-
-          <div class="hori-parent">
-            <div class="item-detail-title">{{item.minRate}}% ~ {{item.maxRate}}%
-                <div class="item-content">年化率</div>
-            </div>
-
-            <div class="item-detail-title">{{item.distributePrice}} = {{item.subscribePrice}}{{item.productCoin}}
-                <div class="item-content">初始价格</div>
-            </div>
-
-            <div class="item-detail-title">{{item.distributeNumber}}
-                <div class="item-content">发行总量</div>
-            </div>
-
-            <div class="item-detail-title">{{item.lockedDate}} {{item.lockedUnit}}
-                <div class="item-content">锁仓周期</div>
-            </div>
-          </div>
         </div>
 
-        <div class="bottomInputContent">
-          <div class="inputParent">
-              <span class="inputtitle">认购数量(BSS)</span>
-              <div class="inputpost">
-                <input type="number" v-model="inputAccount" :placeholder="inputPlace" @input="searchTotal()" ref="inputPlace" class="inputcount">
-                <span class="allaccount" @click="productAll()">全部</span>
-              </div>
-          </div>
-          <div class="shengyufene">
-              <span>预计收益：<em>{{minProductProceeds}} <em v-if="this.minProductProceeds != '0.00'">~</em> {{maxProductProceeds}}<em v-if="this.minProductProceeds != '0.00'">BSS</em></em></span>
-              <span class="shengtoosl">剩余份额：<em>{{productSurplus}}</em></span>
-          </div>
+        <div class="inputcontent">
+            <div class="renchoutitle">认筹数量</div>
+            <input type="number" v-model="inputAccount" :placeholder="inputPlace" @input="searchTotal()" ref="inputPlace" class="inputcount">
         </div>
+        
 
         <!-- SWV -->
         <div class="checksbox">
@@ -113,7 +91,7 @@ export default {
       productPrice:[],
       inputAccount:'',
       productId:'',
-      inputPlace:'请输入认购数量',
+      inputPlace:'认筹数量10BSS起',
       canuseSWV:0,
       frzzedSWV:0,
       showcanuseSWV:false,
@@ -123,6 +101,7 @@ export default {
       maxNumber:'',
       distributeNumber:'',
       subscribeNumber:'',
+      distributeCoin:"",
       subscribePrice:'',
       minRate: '',
       maxRate: '',
@@ -131,13 +110,30 @@ export default {
       phoneShow: false,
       phoneShowSWV:false,
       inputPhone: '',
+      productTitle:"",
+      distributeNumber:0,
+      subscribeNumber:0,
       contentStyleObj:{
 　　　　　height:''
 　　　},
       heightFlag: true,
       heightStatus:1,
       symbol: '0.00',
-      symbolSWV:'0.00'
+      symbolSWV:'0.00',
+      minValue:10,
+      Picindex:0,
+      signIconSrc:{
+        0:require('../../../static/team10.png'),
+        1:require('../../../static/team2.png'),
+        2:require('../../../static/team3.png'),
+        3:require('../../../static/team4.png'),
+        4:require('../../../static/team5.png'),
+        5:require('../../../static/team6.png'),
+        6:require('../../../static/team7.png'),
+        7:require('../../../static/team8.png'),
+        8:require('../../../static/team9.png'),
+        9:require('../../../static/team1.png'),
+      },
     };
   },
   beforeCreate() {},
@@ -225,9 +221,12 @@ export default {
     },
     product(){
       let productId = this.$route.params.id
+      console.log("productid===>>>"+productId)
+      this.Picindex = productId % 10
       let data = {
         uid:cookie.get("userID"),
-        productId: productId
+        productId: productId,
+        productType:2
       }
       this.$ajax.post('/partner/product/page', data,{
         headers: {
@@ -235,24 +234,29 @@ export default {
         },
       }).then( res => {
         if (res.data.success == true) {
+            console.log("产品详情=====>>>>",res.data)
           this.productPrice = []
           res.data.body.content.map((item) => {
             this.productPrice.push(item);
+            this.productTitle = item.productTitle
             this.productId = item.productId // 产品ID
-            this.distributeNumber = item.distributeNumber // 发行总量
-            this.subscribeNumber = item.subscribeNumber // 已认购数量
-            this.subscribePrice = item.subscribePrice // 初始价格
-            this.productSurplus = item.distributeNumber - item.subscribeNumber  // 剩余份额
-            this.maxNumber = item.maxNumber // 最大限购
-            this.minRate = item.minRate // 最小利率
-            this.maxRate = item.maxRate // 最大利率
-            if(item.minNumber && !item.maxNumber){
-              this.inputPlace = '最少' + item.minNumber + '起认购'
-            }else if(item.minNumber && item.maxNumber){
-              this.inputPlace = '单人限购' + item.minNumber + '~' + item.maxNumber
-            }else if(!item.minNumber && item.maxNumber){
-              this.inputPlace = '单人限购' + item.maxNumber
-            }
+            this.subscribeNumber = item.subscribeNumber
+            this.distributeNumber = item.distributeNumber
+            this.distributeCoin = item.distributeCoin
+            // this.distributeNumber = item.distributeNumber // 发行总量
+            // this.subscribeNumber = item.subscribeNumber // 已认购数量
+            // this.subscribePrice = item.subscribePrice // 初始价格
+            // this.productSurplus = item.distributeNumber - item.subscribeNumber  // 剩余份额
+            // this.maxNumber = item.maxNumber // 最大限购
+            // this.minRate = item.minRate // 最小利率
+            // this.maxRate = item.maxRate // 最大利率
+            // if(item.minNumber && !item.maxNumber){
+            //   this.inputPlace = '最少' + item.minNumber + '起认购'
+            // }else if(item.minNumber && item.maxNumber){
+            //   this.inputPlace = '单人限购' + item.minNumber + '~' + item.maxNumber
+            // }else if(!item.minNumber && item.maxNumber){
+            //   this.inputPlace = '单人限购' + item.maxNumber
+            // }
           })
         }
       }).catch(err=>{
@@ -307,6 +311,13 @@ export default {
         });
         return false;
       }
+    //   if(inputAccount < 10)
+    //   {
+    //       dialogs.install({
+    //       title: '认筹数量小于'+this.minValue+"BSS"
+    //     });
+    //     return false;
+    //   }
       if(this.checked == true){
         if(this.inputPhone == ''){
           dialogs.install({
@@ -322,7 +333,10 @@ export default {
     },
     orderCreate(){
       this.showcanuseSWV = false;
+      this.productId = this.$route.params.id
       let productId = this.productId
+    
+      console.log("productid===>>>"+productId)
       let inputAccount = this.inputAccount
       let item = {
         uid:cookie.get("userID"),
@@ -349,11 +363,7 @@ export default {
               'exchange-token': cookie.get("userToken")
             },
           }).then( res => {
-          if(inputAccount > this.productSurplus){
-              dialogs.install({
-                title: '购买数量不能大于剩余份额',
-              });
-            }else if(res.data.code == 0){
+            if(res.data.code == 0){
               dialogs.install({
                 title: '认购成功',
               });
@@ -518,6 +528,7 @@ export default {
       .left {
         font-size: 18px;
         font-family: PingFangSC-Semibold;
+        margin-right: 1.2rem;
         font-weight: 500;
         color: rgba(255, 255, 255, 1);
         width: 100%;
@@ -532,10 +543,64 @@ export default {
       }
     }
 
+    .itemdetail{
+          width: 96%;
+          height: 7rem;
+          margin-left: calc(100% * 0.02);
+          background: #1A1B30;
+          border-radius: 6px;
+          display: flex;
+          flex-direction: row;
+          margin-bottom: 1rem;
+          img{
+              width: 6rem;
+              height: 6rem;
+              align-self: center;
+              margin-left: 0.6rem;
+          }
+
+          .sencondco{
+              padding-top: 0.66rem;
+              margin-left: 1rem;
+              .title1{
+                  color: white;
+                  font-size: 1.1rem;
+              }
+              .title2{
+                  margin-top: 1rem;
+                  color: #FFFFFF;
+                  opacity: 0.6;
+                  font-size: 0.833rem;
+              }
+              .title3{
+                  margin-top: 0.4rem;
+                  color: #FFFFFF;
+                  opacity: 0.8;
+                  font-size: 1.1rem;
+              }
+          }
+
+          .thirdco{
+              margin-left: 1rem;
+              .title11{
+                  margin-top: 3.233rem;
+                  color: #FFFFFF;
+                  font-size: 0.833rem;
+                  opacity: 0.6;
+              }
+              .title22{
+                  margin-top: 0.4rem;
+                  color: #FFFFFF;
+                  font-size: 1.1rem;
+                  opacity: 0.8;
+              }
+          }
+      }
+
   .top-content{
-    background: #1A1B30;
+    // background: #1A1B30;
     margin-top: 4rem;
-    border-radius: 5px;
+    // border-radius: 5px;
     .coindetail{
       display: flex;
       flex-direction: row;
@@ -603,7 +668,23 @@ export default {
       line-height:20px;
     }
   }
+  .inputcontent{
+      display: flex;
+      flex-direction: row;
+      margin-top: 3rem;
+      margin-bottom: 3rem;
+  }
+  .renchoutitle{
+      flex: 1;
+      color:#FFFFFF;
+      margin-top: 0.6rem;
+      opacity: 0.7;
+      margin-left: calc(100% * 0.03);
+      align-self: center;
+  }
   .inputcount{
+    flex: 5;
+    margin-right: calc(100% * 0.03);
     outline-color: invert;
     outline-style: none;
     outline-width: 0px;
@@ -614,10 +695,10 @@ export default {
     box-shadow: none;
     background: transparent;
     width: 60%;
-    border-bottom:1px solid #50515F;
     color: #fff;
-    opacity: 0.8;
-    border: 1px solid #999;
+    opacity: 0.3;
+    border: 1px solid transparent;
+    border-bottom:1px solid #ffffff;
     width: 96%;
     line-height: 40px;
     padding: 0 2%;
@@ -745,7 +826,6 @@ export default {
       margin-top: 20px;
     }
   }
-
 }
 </style>
 

@@ -43,13 +43,27 @@
 
         </div>
 
-        <div class="invite_and_award1">
+        <!-- <div class="invite_and_award1">
           <div class="inviteaward_item1" @click="openGlobalParent">
             <div class="inviteaward_title2">BICC全球合伙人招募中</div>
           </div>
-        </div>
-
+        </div> -->
     </div>
+
+    <div class="partnercontent">
+          <div class="partnercard"  @click="openGlobalParent">
+      <img src="../../../static/partnerbg.png" alt="">
+      <div class="title1">BICC全球合伙人</div>
+      <div class="title2">火热招募中</div>
+    </div>
+
+        <div class="partnercard"  @click="openGlobalZCParent">
+      <img src="../../../static/zhongchoupartner.png" alt="">
+      <div class="title1">BICC全球合伙人</div>
+      <div class="title2">创世众筹计划</div>
+    </div>
+    </div>
+
 
     <div class="parent1">
       <div class="nameandlookdetail">
@@ -146,6 +160,10 @@
 import Scroll from '../../components/Scroll';
 import { qrcanvas } from "qrcanvas";
 import html2canvas from "html2canvas";
+
+import partnerCardbg from "../../../static/partnerbg.png"
+import zhongchoupartnerCardbg from "../../../static/zhongchoupartner.png"
+
 // import Vue from 'vue'
 // import { List, Cell } from 'vant'
 
@@ -327,7 +345,10 @@ export default {
       //suocangandjieList
       this.$router.push("/suocangandjieList")
     },
-    
+    openGlobalZCParent(){
+      this.$router.push("/zcpartner")
+    },
+  
     fenxiang(invitLink){
       //分享链接
       const u = navigator.userAgent;
@@ -427,7 +448,7 @@ export default {
 
   .home_top_quanyi{
     width: 96%;
-    height: 19rem;
+    height: 15.444rem;
     background: #1A1B30;
     position: absolute;
     left: 0;
@@ -527,8 +548,34 @@ export default {
       }
     }
 
+    .partnercontent{
+      display: flex;
+      flex-direction: row;
+            margin-top: 7rem;
+      .partnercard{
+        flex: 1;
+      position: relative;
+      img{
+        width: 92%;
+        margin-left: calc(100% * 0.04);
+      }
+      .title1{
+        margin-top: -6rem;
+        margin-left: calc(100% * 0.1);
+        color: #C10C43;
+        font-size: 1.1rem;
+        font-weight: 600
+      }
+      .title2{
+        color: #FFFFFF;
+        padding-top: 0.3rem;
+        opacity: 0.6;
+        margin-left: calc(100% * 0.1);
+      }
+    }
+    }
 
-
+  
     .inviteaward_item1{
       color: #ffffff;
       height: 4rem;
@@ -580,7 +627,7 @@ export default {
         background:rgba(26,27,48,1);
         border-radius:8px;
         margin-left: calc(100% * 0.02);
-        margin-top: 11rem;
+        margin-top: 3.333rem;
         padding-left: 1rem;
         padding-top: 1rem;
         padding-bottom: 1rem;
