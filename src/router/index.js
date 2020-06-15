@@ -31,7 +31,9 @@ export default new Router({
       component: NewHome,
       meta: {
         index: 0,
-        footer: false
+        footer: false,
+        title: '全球合伙人',
+        keepAlive: true, // 需要被缓存
       }
     },
     {
@@ -40,7 +42,9 @@ export default new Router({
       component:inviteList,
       meta:{
         index:4,
-        footer:false
+        footer:false,
+        title: '邀请人',
+        keepAlive: true, // 需要被缓存
       }
     },
     {
@@ -49,7 +53,9 @@ export default new Router({
       component:rewardRecordList,
       meta:{
         index:4,
-        footer:false
+        footer:false,
+        title: '邀请返佣',
+        keepAlive: true, // 需要被缓存
       }
     },
     {
@@ -67,7 +73,9 @@ export default new Router({
       component:suocangandjiedetail,
       meta:{
         index:4,
-        footer:false
+        footer:false,
+        title: 'BSS认购',
+        keepAlive: true, // 需要被缓存
       }
     },
     {
@@ -76,7 +84,9 @@ export default new Router({
       component:suocangandRedeem,
       meta:{
         index:4,
-        footer:false
+        footer:false,
+        title: '赎回',
+        keepAlive: true, // 需要被缓存
       }
     },
     {
@@ -85,7 +95,9 @@ export default new Router({
       component:zhuanchuRedeem,
       meta:{
         index:4,
-        footer:false
+        footer:false,
+        title: '转出',
+        keepAlive: true, // 需要被缓存
       }
     },
     {
@@ -94,7 +106,9 @@ export default new Router({
       component:suocangList,
       meta:{
         index:4,
-        footer:false
+        footer:false,
+        title: '资产',
+        keepAlive: true, // 需要被缓存
       }
     },
     {
@@ -103,7 +117,9 @@ export default new Router({
       component:suocangandjieList,
       meta:{
         index:4,
-        footer:false
+        footer:false,
+        title: 'BSS全球合伙人',
+        keepAlive: true, // 需要被缓存
       }
     },
     {
@@ -112,7 +128,9 @@ export default new Router({
       component:zcpartner,
       meta:{
         index:4,
-        footer:false
+        footer:false,
+        title: '创世众筹计划',
+        keepAlive: true, // 需要被缓存
       }
     },
     {
@@ -121,7 +139,9 @@ export default new Router({
       component:enterzd,
       meta:{
         index:4,
-        footer:false
+        footer:false,
+        title: '加入战队',
+        keepAlive: true, // 需要被缓存
       }
     }
 

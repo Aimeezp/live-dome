@@ -1,75 +1,89 @@
 <template>
   <div class="bg convert-record">
-        <div class="toptitle">
-            <img class="back" @click="goBack" src="../../../static/back.png" alt srcset>
-            <img src="../../../static/zcparentbg.png" alt="" class="home_top_logo">
-            <div class="title1">BICC全球社区合伙人</div>
-            <div class="title2">创世众筹 · 扬帆启航</div>
+        <div class="isFixedInput" :class="positionScrollTop == false ? 'isNone' :''">
+            <input type="text" placeholder="搜索" v-model="currentValue">      
         </div>
-      
+        <Scroll :class="['scroll', heightStatus == 2 ? 'scrollTopsl' : '', iosConter == 2 ? 'iosConter' : '']" ref="scroll" :pull-up-load="true" :probe-type="3" @scroll="positionScroll" @pullingUp="loadMore">
+            <div class="toptitle">
+                <!-- <img class="back" @click="goBack" src="../../../static/back.png" alt srcset> -->
+                <img src="../../../static/zcparentbg.png" alt="" class="home_top_logo">
+                <div class="title1">BICC全球社区合伙人</div>
+                <div class="title2">创世众筹 · 扬帆启航</div>
+            </div>          
 
-        <div class="home_top_quanyi">
-            <div class="waikuang" @click="createzd">申请创建战队</div>
+            <div class="home_top_quanyi">
+                <div class="waikuang" @click="createzd">申请创建战队</div>
+                
+                <a class="waikuang2" href="https://bi-cc.zendesk.com/hc/zh-cn/articles/900001229266-BICC%E5%85%A8%E7%90%83%E5%90%88%E4%BC%99%E4%BA%BA%E5%88%9B%E4%B8%96%E4%BC%97%E7%AD%B9%E8%AE%A1%E5%88%92"><div>规则详情</div></a>
+            </div>
+
+
+            <!-- 这里需要给组件添加一个class，用于控制固定的位置，看css注释部分 -->
+            <!-- <sticky-slot class="stickyTop">
+              <div ref="pronbit" class="zhanduititle" :class="searchBarFixed == true ? 'isFixed' :''">
+                <input type="text" placeholder="搜索" v-model="currentValue">       
+              </div>
+            </sticky-slot> -->
             
-            <a class="waikuang2" href="https://bi-cc.zendesk.com/hc/zh-cn/articles/900001229266-BICC%E5%85%A8%E7%90%83%E5%90%88%E4%BC%99%E4%BA%BA%E5%88%9B%E4%B8%96%E4%BC%97%E7%AD%B9%E8%AE%A1%E5%88%92"><div>规则详情</div></a>
-        </div>
-
-        <div class="zhanduititle">推荐的战队</div>
-
-            <Scroll :class="['scroll', heightStatus == 2 ? 'scrollTopsl' : '', iosConter == 2 ? 'iosConter' : '']" ref="scroll" :pull-up-load="true" :probe-type="3" @pullingUp="loadMore">
-                
+            <div :class="positionScrollTop == true ? 'isNone' :''">
+              <div ref="pronbit" class="zhanduititle">
+                <input type="text" placeholder="搜索" v-model="currentValue">       
+              </div>
+            </div>
+            
+            <div v-if="productList.length">
                 <div class="itemdetail" v-for="item in productList">
-                    <img :src="signIconSrc[getIndex(item)]" alt="">
-                    <div class="detail_content">
-                        <div class="title1">{{item.productTitle}}</div>
-                        <div class="detail_content2">
-                            <div class="sencondco">
-                        
-                        <div class="title2">已众筹资金</div>
-                        <div class="title3">{{item.distributeNumber}}{{item.distributeCoin}}</div>
-                    </div>
-                    <div class="thirdco">
-                        <div class="title11">参与人数</div>
-                        <div class="title22">{{item.subscribeNumber}}</div>
-                    </div>
-                        </div>
-                    </div>
-                    <div class="btnenter" @click="enterzd(item.productId)">加入战队</div>
+                  <img :src="signIconSrc[getIndex(item)]" alt="">
+                  <div class="detail_content">
+                      <div class="title1">{{item.productTitle}}</div>
+                      <div class="detail_content2">
+                          <div class="sencondco">
+                              <div class="title2">已众筹资金</div>
+                              <div class="title3">{{item.distributeNumber}}{{item.distributeCoin}}</div>
+                          </div>
+                          <div class="thirdco">
+                              <div class="title11">参与人数</div>
+                              <div class="title22">{{item.subscribeNumber}}</div>
+                          </div>
+                      </div>
+                  </div>
+                  <div v-if="item.subscribeStatus == 1" class="btnenter" @click="enterzd(item.productId)">加入战队</div>
+                  <div v-else class="jieshu"><img src="../../../static/jieshu.png" alt=""></div>
                 </div>
-                
-            </Scroll>
+            </div>
+            <div v-else class="nodata">
+              <img src="../../../static/nullobj.png" alt="">
+              <div>无结果~</div>
+            </div>
+            
+        </Scroll>
 
 
-            <van-popup v-model="middleshow" position="bottom" class="middleshowpopup">
-                
-                <div class="top_content">
-                    <div class="pop_title">申请战队</div>
-                    <img src="../../../static/closepopup.png" alt="" @click="closepopup">
-                </div>
+        <van-popup v-model="middleshow" position="bottom" class="middleshowpopup">
+            <div class="top_content">
+                <div class="pop_title">申请战队</div>
+                <img src="../../../static/closepopup.png" alt="" @click="closepopup">
+            </div>
 
-                <div class="inputcontent">
-                    <div class="inputtitle">战队名称</div>
-                    <!-- v-on:input="change" -->
-                    <input type="text" v-model="inputname" :placeholder="inputhintname" class="inputcount">   
-                </div>
+            <div class="inputcontent">
+                <div class="inputtitle">战队名称</div>
+                <input type="text" v-model="inputname" :placeholder="inputhintname" class="inputcount">   
+            </div>
 
+            <div class="popupdes">BICC全球合伙人申请创世众筹战队，合伙人锁仓资产不得低于2000BSS</div>
 
-                <div class="popupdes">BICC全球合伙人申请创世众筹战队，合伙人锁仓资产不得低于2000BSS</div>
-
-
-
-                      <div class="onBtnpost" @click="creatProductZD()">
-        <div class="onBtn"></div>
-        <div class="onBtnque">确定</div>
-      </div>
-
-            </van-popup> 
+            <div class="onBtnpost" @click="creatProductZD()">
+              <div class="onBtn"></div>
+              <div class="onBtnque">确定</div>
+            </div>
+        </van-popup> 
   </div>
 </template>
 
 <script>
 
 import Scroll from '../../components/Scroll';
+// import stickySlot from '../../components/stickySlot';
 // import { qrcanvas } from "qrcanvas";
 // import html2canvas from "html2canvas";
 
@@ -110,11 +124,15 @@ export default {
         8:require('../../../static/team9.png'),
         9:require('../../../static/team1.png'),
       },
-      productPicIndex:0
+      productPicIndex:0,
+      currentValue: "",
+      searchBarFixed: false,
+      positionScrollTop: false,
     }
   },
   components:{
-    Scroll
+    Scroll,
+    //stickySlot
   },
   watch: {
     imgUrl(val, oldval) {
@@ -122,6 +140,13 @@ export default {
       //   this.$refs.box.style.display = "none";
       //   console.log(val);
 
+    },
+    currentValue(curVal, oldVal) {
+      // 实现input连续输入，只发一次请求
+      clearTimeout(this.timeout)
+      this.timeout = setTimeout(() => {
+        this.handleChangeName(curVal)
+      }, 500)
     }
   },
   // updated(){
@@ -142,31 +167,56 @@ export default {
   
   // },
   mounted() {
-    
+    window.addEventListener("scroll", this.handleScroll, true);
+  },
+  destroyed() {
+    window.removeEventListener("scroll", this.handleScroll, true);
   },
   computed: {
       
   },
   created(){
-      this.UserID = cookie.get("userID")
+    this.UserID = cookie.get("userID")
     this.getProductList();
   },
   methods: {
-      getIndex(item){
-          return item.productId % 10
-      },
+    positionScroll(msg){
+      if(msg.y < -270){
+        this.positionScrollTop = true
+      }else{
+        this.positionScrollTop = false
+      }
+    },
+    handleScroll(){
+      if(this.$refs.pronbit.getBoundingClientRect().top <= 0){
+        this.searchBarFixed = true
+      }else{
+        this.searchBarFixed = false
+      }
+      console.log('距离顶部高度', this.$refs.pronbit.getBoundingClientRect().top)
+    },
+    getIndex(item){
+        return item.productId % 10
+    },
     goBack() {
       this.$router.go(-1);
     },
     enterzd(productId){
-        //enterzd
         this.$router.push("/enterzd/"+productId)
     },
     loadMore(){
         this.pageNumber++;
         this.getProductList();
         this.$refs.scroll.finishPullUp()
-        this.$refs.scroll.refresh()
+        // this.$refs.scroll.refresh()
+    },
+    handleChangeName (value) {
+      // if (value === '') {
+      //   return false;
+      // }
+      this.pageNumber = 1
+      this.productList = []
+      this.getProductList()
     },
     createzd(){
         this.middleshow = true
@@ -175,11 +225,12 @@ export default {
         this.middleshow = false
     },
     getProductList(){
-        let data = {
+      let data = {
         uid:this.UserID,
         productType:2,
         pageNumber:this.pageNumber,
-        pageSize:this.pageSize
+        pageSize:this.pageSize,
+        productTitle: this.currentValue
       }
       this.$ajax.post('/partner/product/page', data,{
                         headers: {
@@ -190,7 +241,7 @@ export default {
           res.data.body.content.map((item) => {
             this.productList.push(item);
           })
-                  setTimeout(() => {
+          setTimeout(() => {
             this.$refs.scroll.refresh()
           }, 10);
         }
@@ -229,6 +280,64 @@ export default {
 </script>
 
 <style lang="less" scoped>
+  /* 
+    通过设置top的值，控制需要固定在什么位置，0是顶部，值为number(px)
+  */
+  .stickyTop {
+    top: 0;
+    z-index: 10;
+  }
+
+  .nodata{
+    width: 100%;
+    align-items: center;
+    z-index: 9999;
+    img{
+      display: block !important;
+      margin:auto;
+      margin-top: 10rem;
+    }
+    div{
+      color: white;
+      width: 100%;
+      text-align: center;
+      margin-top: 1rem;
+    }
+    
+  }
+
+  .isNone{
+    display: none;;
+  }
+
+  .isFixed{
+    position: fixed;
+    input{
+      width: 100% !important;
+    }
+  }
+
+  .isFixedInput{
+    position: fixed;
+    top: 0;
+    z-index: 9999;
+    width: 100%;
+    line-height: 2rem;
+    background: #1a1b30;
+    border-bottom: 1px solid #363747;
+    input{
+      width: 85%;
+      border: 1px solid #363747;
+      color: #999;
+      background: #252638;
+      padding: 0 2%;
+      border-radius: 20px;
+      margin-left: 5%;
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+    }
+  }
+
   .bg {
     position: fixed;
     top: 0;
@@ -313,30 +422,31 @@ export default {
     }
 
     .zhanduititle{
-        width: 100%;
+        width: 96%;
         height: 2rem;
         line-height: 2rem;
         margin-top: 5rem;
-        color: #FFFFFF;
-        opacity: 0.6;
-        margin-left: calc(100% *0.05);
+        margin-bottom: 1rem;
+        padding: 0 calc(100% *0.05);
+        input{
+          width: 50%;
+          border: 1px solid #363747;
+          color: #999;
+          background: #252638;
+          padding: 0 2%;
+          border-radius: 20px;
+        }
     }
-.scrollConter{
-
-      }
 
       .scroll{
-        overflow-y: scroll;
+        // overflow-y: scroll;
         position: absolute;
-        top: 22rem;
+        top: 0rem;
         bottom: 0px;
         margin-bottom: 0rem;
         left: 0;
         right: 0;
         align-items: center;
-        
-      }
-      .scrollTopsl{
         
       }
       .iosConter{
@@ -424,6 +534,18 @@ export default {
               position: absolute;
               right: 2.6rem;
               margin: 2rem auto;
+          }
+          .jieshu img{
+              width: 4rem;
+              height: 4rem;
+              margin-top: 1.5rem;
+              position: absolute;
+              right: 2.5rem;
+              transform:rotate(17deg);
+              -ms-transform:rotate(17deg); 	/* IE 9 */
+              -moz-transform:rotate(17deg); 	/* Firefox */
+              -webkit-transform:rotate(17deg); /* Safari 和 Chrome */
+              -o-transform:rotate(17deg); 	/* Opera */
           }
       }
 

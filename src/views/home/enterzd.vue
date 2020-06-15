@@ -1,13 +1,12 @@
 <template>
   <div class="bgColor">
     <div class="mine_bg">
-      <div class="scrollConter">
+      <!-- <div class="scrollConter">
           <div class="top-bar al">
               <img class="back" @click="goBack" src="../../../static/back.png" alt srcset>
               <div class="left">加入战队</div>
-
           </div>
-      </div>
+      </div> -->
 
       <div class="top-content">
         
@@ -599,7 +598,7 @@ export default {
 
   .top-content{
     // background: #1A1B30;
-    margin-top: 4rem;
+    // margin-top: 4rem;
     // border-radius: 5px;
     .coindetail{
       display: flex;

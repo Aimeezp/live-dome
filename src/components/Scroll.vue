@@ -19,12 +19,12 @@
       pullUpLoad: {
         type: Boolean,
         default: false
-      }
+      },
     },
     data() {
       return {
         scroll: null,
-        message: '哈哈哈'
+        message: '哈哈哈',
       }
     },
     mounted() {
@@ -37,7 +37,6 @@
 
       // 2.监听滚动的位置
       this.scroll.on('scroll', (position) => {
-        // console.log(position);
         this.$emit('scroll', position)
       })
 

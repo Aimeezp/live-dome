@@ -2,12 +2,12 @@
   <div class="mine_bg">
 
     <div class="contfix">
-      <div class="scrollConter">
+      <!-- <div class="scrollConter">
           <div class="top-bar al">
               <img class="back" @click="goBack" src="../../../static/back.png" alt srcset>
               <div class="left">资产</div>
           </div>
-      </div>
+      </div> -->
       <div class="topContent_Assets">
           <div class="Assets_Item">
               <span class="Assets_Title">总资产</span>
@@ -563,7 +563,7 @@ export default {
       
     }
     .topContent_Assets{
-        margin-top: 5rem;
+        margin-top: 1rem;
         margin-left: 2rem;
         flex-direction: row;
         line-height: 1.7rem;
@@ -606,7 +606,7 @@ export default {
     }
     .selectcontent{
       position: fixed;
-      top:12rem;
+      top:8rem;
       width: 94%;
       height: 3rem;
       line-height: 3rem;
@@ -710,14 +710,14 @@ export default {
 
     }
     .contapls{
-      margin-top: 16rem;
+      margin-top: 12rem;
       padding: 0px calc(2%) 0px calc(2%);
     }
     .convert-shouyi{
       width: 94%;
       overflow-y: scroll;
       position: fixed;
-      top: 15.6rem;
+      top: 11.6rem;
       bottom: 4rem;
       left: 3%;
       right: 0;

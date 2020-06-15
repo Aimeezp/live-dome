@@ -1,4 +1,4 @@
-<template>
+ <template>
   <div class="bg convert-record">
     <scroll class="scroll">
       <img src="../../../static/home_top_logo.png" alt="" class="home_top_logo">
@@ -51,17 +51,17 @@
     </div>
 
     <div class="partnercontent">
-          <div class="partnercard"  @click="openGlobalParent">
-      <img src="../../../static/partnerbg.png" alt="">
-      <div class="title1">BICC全球合伙人</div>
-      <div class="title2">火热招募中</div>
-    </div>
+      <div class="partnercard"  @click="openGlobalParent">
+        <img src="../../../static/partnerbg.png" alt="">
+        <div class="title1">BICC全球合伙人</div>
+        <div class="title2">火热招募中</div>
+      </div>
 
-        <div class="partnercard"  @click="openGlobalZCParent">
-      <img src="../../../static/zhongchoupartner.png" alt="">
-      <div class="title1">BICC全球合伙人</div>
-      <div class="title2">创世众筹计划</div>
-    </div>
+      <div class="partnercard"  @click="openGlobalZCParent">
+        <img src="../../../static/zhongchoupartner.png" alt="">
+        <div class="title1">BICC全球合伙人</div>
+        <div class="title2">创世众筹计划</div>
+      </div>
     </div>
 
 

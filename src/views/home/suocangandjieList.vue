@@ -1,16 +1,11 @@
 <template>
   <div class="mine_bg">
-      <!-- <img src="../../assets/images/mine/waiting.png" alt /> -->
-    <!-- <div class="top-bar">
-      <span>挖礦</span>
-    </div> -->
-
-    <div class="scrollConter">
+    <!-- <div class="scrollConter">
         <div class="top-bar al">
             <img class="back" @click="goBack" src="../../../static/back.png" alt srcset>
             <div class="left">BSS全球合伙人</div>
         </div>
-    </div>
+    </div> -->
     <div class="convert-body" v-if="productList.length">
       <van-list
         v-model="loading"
@@ -303,7 +298,7 @@ export default {
 } 
 
 .convert-body {
-    padding: 4rem calc(2%) 1rem calc(2%);
+    padding: 1rem calc(2%) 1rem calc(2%);
     
     //设置item背景样式,距离下面的间距
     .van-cell {

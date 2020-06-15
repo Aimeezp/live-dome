@@ -6,10 +6,10 @@
     </div> -->
 
     <div class="scrollConter">
-        <div class="top-bar al">
+        <!-- <div class="top-bar al">
             <img class="back" @click="goBack" src="../../../static/back.png" alt srcset>
             <div class="left">邀请返佣</div>
-        </div>
+        </div> -->
 
         <div class="totalandyestoday">
             <div class="yestoday">
@@ -352,7 +352,7 @@ export default {
     .totalandyestoday{
         flex-direction: row;
         color: white;
-        margin-top: 5rem;
+        margin-top: 2rem;
         margin-bottom: 2rem;
         text-align: center;
         width: 94%;
@@ -481,15 +481,12 @@ export default {
       .scroll{
         overflow-y: scroll;
         position: fixed;
-        top: 10rem;
+        top: 7rem;
         bottom: 0px;
         margin-bottom: 0rem;
         left: 0;
         right: 0;
         align-items: center;
-        
-      }
-      .scrollTopsl{
         
       }
       .iosConter{

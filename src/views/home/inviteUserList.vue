@@ -6,10 +6,10 @@
     </div> -->
 
     <div class="scrollConter">
-        <div class="top-bar al">
+        <!-- <div class="top-bar al">
             <img class="back" @click="goBack" src="../../../static/back.png" alt srcset>
             <div class="left">邀请人</div>
-        </div>
+        </div> -->
         
         <div class="listtitle">
             <div class="titleparent">
@@ -30,7 +30,7 @@
                     <div class="user">{{item.serviceRemark}}</div>
                     <div class="count">{{item.income}} {{item.codeSymbol}}</div>
                 </div>
-                
+
             </Scroll>
               
         </div>
@@ -244,9 +244,11 @@ export default {
             border-top-left-radius: 6px;
             border-top-right-radius: 6px;
             text-align: center;
-            margin: 4.166667rem auto;
-            padding-bottom: 2rem;
-            padding-top: 1rem;
+            // margin: 4.166667rem auto;
+            margin: auto;
+            margin-top: 1rem;
+            padding-bottom: 1.5rem;
+            padding-top: 1.5rem;
             position: relative;
         }
         
@@ -322,22 +324,16 @@ export default {
     }
   
 }
-      .scrollConter{
-
-      }
 
       .scroll{
         overflow-y: scroll;
         position: fixed;
-        top: 8rem;
+        top: 5rem;
         bottom: 0px;
         margin-bottom: 0rem;
         left: 0;
         right: 0;
         align-items: center;
-        
-      }
-      .scrollTopsl{
         
       }
       .iosConter{

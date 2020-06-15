@@ -40,3 +40,18 @@ new Vue({
   },
   template: '<App/>'
 })
+
+
+//设置title
+import VueWechatTitle from 'vue-wechat-title'
+Vue.use(VueWechatTitle)
+
+// 根据路由设置标题
+router.beforeEach((to, from, next) => {
+  /*路由发生改变修改页面的title */
+  // if(to.meta.title) {
+  //   document.title = to.meta.title
+  // }
+  window.document.title = to.meta.title == undefined ? '全球合伙人' : to.meta.title
+  next();
+})
