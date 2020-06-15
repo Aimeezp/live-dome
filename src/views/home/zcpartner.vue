@@ -4,7 +4,7 @@
             <img class="back" @click="goBack" src="../../../static/back.png" alt srcset>
             <img src="../../../static/zcparentbg.png" alt="" class="home_top_logo">
             <div class="title1">BICC全球社区合伙人</div>
-            <div class="title2">创世众筹 · 杨帆启航</div>
+            <div class="title2">创世众筹 · 扬帆启航</div>
         </div>
       
 
@@ -124,6 +124,23 @@ export default {
 
     }
   },
+  // updated(){
+  //       let img = document.getElementsByClassName('content')[0].getElementsByTagName('img')
+  //       let count = 0
+  //       let length = img.length
+  //       if (length) {
+  //           let timer = setInterval(() => {
+  //               if (count == length) {
+  //                   // console.log('refresh')
+  //                   this.$refs.scroll.refresh()
+  //                   clearInterval(timer)
+  //               } else if (img[count].complete) {
+  //                   count ++
+  //               }
+  //           }, 50)
+  //       }
+  
+  // },
   mounted() {
     
   },
@@ -149,6 +166,7 @@ export default {
         this.pageNumber++;
         this.getProductList();
         this.$refs.scroll.finishPullUp()
+        this.$refs.scroll.refresh()
     },
     createzd(){
         this.middleshow = true
@@ -172,6 +190,9 @@ export default {
           res.data.body.content.map((item) => {
             this.productList.push(item);
           })
+                  setTimeout(() => {
+            this.$refs.scroll.refresh()
+          }, 10);
         }
 
       }).catch(err=>{
@@ -306,7 +327,7 @@ export default {
 
       .scroll{
         overflow-y: scroll;
-        position: fixed;
+        position: absolute;
         top: 22rem;
         bottom: 0px;
         margin-bottom: 0rem;
