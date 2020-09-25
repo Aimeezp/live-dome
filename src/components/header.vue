@@ -1,88 +1,98 @@
 <template>
-  <div class="title-box">
-    <img class="back" @click="goBack" src="../assets/images/detail/back.png" alt srcset>
-    <div class="left">{{title}}</div>
-    <span class="right" v-if="hasRule" @click="goRule">
-      <img src="../assets/images/detail/wen.png" alt="" srcset="">
-      <span>玩法</span>
-    </span>
+  <div class="title-conter">
+    <div class="title-left">网红直播带货DEO</div>
+    <div class="title-box">
+      <router-link :to="{name:'home'}"> 全部商品 </router-link><span></span>
+      <router-link :to="{name:'inviteList'}"> 淘宝主播 </router-link><span></span>
+      <router-link :to="{name:'rewardRecordList'}"> 抖音主播 </router-link>
+      <!-- <router-link :to="{name:'detail'}"> 详情 </router-link> -->
+    </div>
+    <div>
+      <el-date-picker
+        :readonly="true"
+        v-model="date"
+        type="daterange"
+        value-format='yyyy-MM-dd'
+        range-separator="～"
+        start-placeholder="开始日期"
+        end-placeholder="结束日期"
+      >
+      </el-date-picker>
+    </div>
+
   </div>
 </template>
 
 <script>
+import axios from "axios";
 export default {
-  props: {
-    title: {
-      type: String,
-      default: ""
-    },
-    hasRule: {
-      type: Boolean,
-      default: false
-    },
-
-  },
   data() {
-    return {};
+    return {
+      date: "",
+    };
+  },
+  mounted() {
+    this.getTime();
   },
   methods: {
-    goBack() {
-      this.$router.go(-1);
+    getTime() {
+      axios
+        .get("http://43.254.55.231:8080/api/index/date_range", {
+          params: {},
+        })
+        .then((res) => {
+          if (res.data.code && res.data.code == 200) {
+            this.date = res.data.data;
+          }
+        })
+        .catch((e) => {
+          console.log("获取数据失败");
+        });
     },
-    goRule(){
-       this.$router.push('/play');
-    }
-  }
+  },
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang='less'>
-.title-box {
-  width: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  background: #21242A;
-  z-index: 400;
-  height: 3.666667rem;
-  // box-shadow: 0rem .166667rem .166667rem 0rem rgba(46, 70, 120, 0.02);
-  //   0rem -0.083333rem 0rem 0rem rgba(244, 240, 245, 1);
-  .left {
-    text-align: center;
-    width: 100%;
-    height: 100%;
-    font-size: 1.5rem;
-    line-height: 3.666667rem;
-    font-family:PingFangSC-Semibold;
-    font-weight: 500;
-    color: rgba(255, 255, 255, .8);
+<style  lang='less'>
+.title-conter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 30px;
+  border-bottom: 1px solid #6b6e81;
+  .title-box span {
+    display: inline-block;
+    height: 10px;
+    border-right: 1px solid #6b6e81;
+    margin: 0 10px;
   }
-  img.back {
-    height: 1.666667rem;
-    width: auto;
-    position: absolute;
-    top: 1rem;
-    left: 1.25rem;
+  a {
+    color: #fff;
+    font-weight: bold;
   }
-  span.right {
-    height: 1.666667rem;
-    width: auto;
-    position: absolute;
-    top: 1rem;
-    right: 1.25rem;
-    line-height:1.666667rem; 
-    img{
-      width: 1.166667rem;
-      display: inline-block;
-      position: relative;
-      top: .166667rem;
-      left: -0.166667rem;
-    }
-    span{
-      color: #8D98C1;
-      font-size: 1.166667rem;
-    }
+  a:hover {
+    color: #409eff;
+  }
+  .router-link-exact-active {
+    color: #409eff;
+  }
+  .title-left {
+    color: #0c87ff;
+    font-weight: bold;
+    font-size: 18px;
+  }
+  .el-input__inner {
+    background: #262837;
+    color: #fff;
+    border: none;
+  }
+  .el-date-editor .el-range-input {
+    background: #262837;
+    color: #fff;
+  }
+  .el-date-editor .el-range-separator {
+    color: #fff;
   }
 }
 </style>
