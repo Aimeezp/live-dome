@@ -5,12 +5,10 @@
     <div class="tabContaobao">
       <div class="btnCon">
         <div class="option">
-          <el-input
-            placeholder="请输入搜索关键词"
-            suffix-icon="el-icon-search"
-            v-model="keyWords"
-          >
-          </el-input>
+                  <el-input placeholder="请输入搜索关键词"
+            v-model="keyWords" >
+    <el-button slot="append" icon="el-icon-search" @click="getList(1)"></el-button>
+  </el-input>
         </div>
         <el-tabs
           v-model="tabPosition"
@@ -149,7 +147,7 @@ export default {
     },
     cellClick(column, cell) {
       if (cell.label == "淘宝主播名") {
-        this.$router.push({path: '/detailtb', query: {id: column.anchorId}})
+        this.$router.push({path: '/detailtb', query: {id: column.anchorId, name: 'tb'}})
       }
     },
     //列表方法
@@ -159,7 +157,8 @@ export default {
           params: {
             current_page: this.pageSize,
             page_size: this.pageNum,
-            Sort_field: this.tabPosition,
+            sort_field: this.tabPosition,
+            name: this.keyWords,
           },
         })
         .then((res) => {
@@ -208,17 +207,15 @@ export default {
         color: #fff;
         height: 32px;
         line-height: 32px;
+        border-right: 0;
       }
       .el-input__suffix {
         right: 0;
       }
-      .el-input__icon {
-        line-height: 32px;
-        background-color: #409eff;
-        color: #fff;
-        width: 40px;
-        border-top-right-radius: 4px;
-        border-bottom-right-radius: 4px;
+      .el-input-group__append {
+    background-color: #409eff;
+    color: #fff;
+    border: 1px solid #409eff;
       }
     }
     .el-tabs--top .el-tabs__item.is-top:last-child {

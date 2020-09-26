@@ -1,6 +1,6 @@
 # one-bi-mobile
 
-> A Vue.js project
+> 网红直播带货DEMO
 
 ## Build Setup
 

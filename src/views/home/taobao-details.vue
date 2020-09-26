@@ -87,6 +87,7 @@
             <el-select
               v-model="value"
               placeholder="品类筛选"
+               @change="goodChang"
             >
               <el-option
                 v-for="(item, index) in options"
@@ -103,11 +104,11 @@
           >
             <el-tab-pane
               label="按转化率"
-              name="btn1"
+              name="conRate"
             ></el-tab-pane>
             <el-tab-pane
               label="按GPM"
-              name="btn2"
+              name="gpm"
             ></el-tab-pane>
           </el-tabs>
         </div>
@@ -130,7 +131,7 @@
           >
           </el-table-column>
           <el-table-column
-            prop="name"
+            prop="goodsType"
             align="center"
             label="品类"
           >
@@ -203,19 +204,19 @@ export default {
       value: "",
       options: [
         {
-          value: 0,
+          value: "食品",
           label: "食品",
         },
         {
-          value: 1,
+          value: "化妆品",
           label: "化妆品",
         },
         {
-          value: 2,
+          value:  "快消品",
           label: "快消品",
         },
         {
-          value: 3,
+          value: "汽车",
           label: "汽车",
         },
       ],
@@ -226,7 +227,7 @@ export default {
       chartLine2: null,
       chartLine3: null,
 
-      tabPosition: "btn1",
+      tabPosition: "conRate",
       tableData: [
         // {
         //   name: "网红方便面网红方便面网红方便面",
@@ -277,7 +278,7 @@ export default {
   },
   watch: {},
   mounted() {
-    this.getTbDetails();
+    this.getTbDetails(this.value, this.tabPosition);
     setTimeout(() => {
       this.initChartLine();
       this.initChartLine1();
@@ -303,11 +304,13 @@ export default {
   created() {},
   methods: {
     //获取详情
-    getTbDetails() {
+    getTbDetails(value, tabPosition) {
       axios
         .get("http://43.254.55.231:8080/api/tb/detail", {
           params: {
             anchorId: this.$route.query.id,
+            sort_field: this.tabPosition,
+            goodsType: this.value,
           },
         })
         .then((res) => {
@@ -322,9 +325,13 @@ export default {
           console.log("获取数据失败");
         });
     },
+    goodChang(v){
+     this.getTbDetails(v, this.tabPosition)
+    },
     //右边切换
     handleClickRight(tab) {
-      console.log(tab);
+      this.tabPosition = tab.name;
+      this.getTbDetails(this.value, this.tabPosition)
     },
     initChartLine1() {
       const data = this.allData.customer_price;

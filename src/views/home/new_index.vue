@@ -8,6 +8,7 @@
           <el-select
             v-model="value"
             placeholder="品类筛选"
+            @change="goodChang"
           >
             <el-option
               v-for="(item, index) in options"
@@ -25,23 +26,23 @@
         >
           <el-tab-pane
             label="按客单价"
-            name="btn1"
+            name="avgCustomerPrice"
           ></el-tab-pane>
           <el-tab-pane
             label="按总销售额"
-            name="btn2"
+            name="totalSales"
           ></el-tab-pane>
           <el-tab-pane
             label="按总销量"
-            name="btn3"
+            name="totalSold"
           ></el-tab-pane>
           <el-tab-pane
             label="按转化率"
-            name="btn4"
+            name="conRate"
           ></el-tab-pane>
           <el-tab-pane
             label="按GPM"
-            name="btn5"
+            name="gpm"
           ></el-tab-pane>
         </el-tabs>
       </div>
@@ -93,67 +94,35 @@ export default {
       value: '',
       options: [
         {
-          value: 0,
+          value: "食品",
           label: "食品",
         },
         {
-          value: 1,
+          value: "化妆品",
           label: "化妆品",
         },
         {
-          value: 2,
+          value:  "快消品",
           label: "快消品",
         },
         {
-          value: 3,
+          value: "汽车",
           label: "汽车",
         },
       ],
       activeName: "all",
-      tabPosition: "btn1",
+      tabPosition: "avgCustomerPrice",
       total: 4,
       pageSize: 1,
       pageNum: 10,
       tableData: [
-        {
-          name: "网红方便面网红方便面网红方便面",
-          zhubo: "王小虎",
-          ptai: "淘宝",
-          date: "2016-05-02",
-          price: "2093",
-          xiaoliang: "10000",
-          danjia: "18.69",
-          zhuanhua: "1.9872%",
-          GPM: "19.56",
-        },
-        {
-          name: "网红方便面网红方便面网红方便面",
-          zhubo: "王小虎",
-          ptai: "淘宝",
-          date: "2016-05-02",
-          price: "2093",
-          xiaoliang: "10000",
-          danjia: "18.69",
-          zhuanhua: "1.9872%",
-          GPM: "19.56",
-        },
-        {
-          name: "网红方便面网红方便面网红方便面",
-          zhubo: "王小虎",
-          ptai: "淘宝",
-          date: "2016-05-02",
-          price: "2093",
-          xiaoliang: "10000",
-          danjia: "18.69",
-          zhuanhua: "1.9872%",
-          GPM: "19.56",
-        },
+        
       ],
     };
   },
   watch: {},
   mounted() {
-    this.getList(1);
+    this.getList(this.activeName, 1, this.value);
   },
   computed: {},
   created() {},
@@ -188,21 +157,27 @@ export default {
     handleClick(tab) {
       console.log(tab);
       this.activeName = tab.name;
-      this.getList(this.activeName, 1);
+      this.getList(this.activeName, 1, this.value,  this.tabPosition);
     },
     //右边切换
     handleClickRight(tab) {
+      this.tabPosition = tab.name;
+      this.getList(this.activeName,this.pageNum,this.value, this.tabPosition)
       console.log(tab);
     },
+    goodChang(v){
+     this.getList(this.activeName,this.pageNum,v, this.tabPosition)
+    },
     //列表方法
-    getList(name, pageNum) {
+    getList(name, pageNum, goodType, tabPosition) {
       axios
         .get("http://43.254.55.231:8080/api/index/list", {
           params: {
-            //date_start date_end
             current_page: this.pageSize,
             page_size: this.pageNum,
             type: this.activeName,
+            goodsType:this.value,
+            sort_field:this.tabPosition,
           },
         })
         .then((res) => {
@@ -218,7 +193,7 @@ export default {
     //翻页
     handleCurrentChange(v) {
       this.pageSize = v;
-      this.getList(v);
+      this.getList(this.activeName,v, this.value, this.tabPosition);
     },
   },
 };

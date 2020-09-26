@@ -12,8 +12,8 @@
               class="host"
               style="text-align:left"
             >抖音主播名称</p>
-            <p class="nam">{{hostName}}</p>
-            <p class="hostid">id:{{hostId}}</p>
+            <p class="nam">{{anchor_detail.name}}</p>
+            <p class="hostid">id:{{anchor_detail.anchorId}}</p>
           </div>
         </el-col>
         <el-col :span="10">
@@ -21,37 +21,37 @@
             <ul class="topNum">
               <li>
                 <p>客单价</p>
-                <p class="num">47.10</p>
+                <p class="num">{{anchor_detail.liveCustomerPrice}}</p>
               </li>
               <li>
                 <p>总销售额</p>
-                <p class="num">47.10</p>
+                <p class="num">{{anchor_detail.totalSales}}</p>
               </li>
               <li>
                 <p>总销量</p>
-                <p class="num">47.10</p>
+                <p class="num">{{anchor_detail.totalSold}}</p>
               </li>
             </ul>
             <ul class="bottomNum">
               <li>
                 <p>直播次数</p>
-                <p class="num">47.10</p>
+                <p class="num">{{anchor_detail.numLives}}</p>
               </li>
               <li>
                 <p>厂均同时最高在线</p>
-                <p class="num">47.10</p>
+                <p class="num">{{anchor_detail.avgOnlineViewers}}</p>
               </li>
               <li>
                 <p>平均场观</p>
-                <p class="num">47.10</p>
+                <p class="num">{{anchor_detail.avgVisitor}}</p>
               </li>
               <li>
                 <p>平均粉丝增加</p>
-                <p class="num">47.10</p>
+                <p class="num">{{anchor_detail.avgFansChange}}</p>
               </li>
               <li>
                 <p>音浪收入</p>
-                <p class="num">47.10</p>
+                <p class="num">{{anchor_detail.totalSound}}</p>
               </li>
             </ul>
           </div>
@@ -94,6 +94,7 @@
             <el-select
               v-model="value"
               placeholder="品类筛选"
+               @change="goodChang"
             >
               <el-option
                 v-for="(item, index) in options"
@@ -110,11 +111,11 @@
           >
             <el-tab-pane
               label="按转化率"
-              name="btn1"
+              name="conRate"
             ></el-tab-pane>
             <el-tab-pane
               label="按GPM"
-              name="btn2"
+              name="gpm"
             ></el-tab-pane>
           </el-tabs>
         </div>
@@ -130,47 +131,50 @@
           style="width: 100%"
         >
           <el-table-column
-            prop="name"
+            prop="goodsName"
+            show-overflow-tooltip
             label="商品名称"
           >
           </el-table-column>
           <el-table-column
-            prop="zhubo"
-            label="带货主播"
-          >
-          </el-table-column>
-          <el-table-column
-            prop="ptai"
-            label="带货平台"
+            prop="goodsType"
+            align="center"
+            label="品类"
           >
           </el-table-column>
           <el-table-column
             prop="date"
+            align="center"
             label="直播日期"
           >
           </el-table-column>
           <el-table-column
-            prop="price"
+            prop="numSales"
+            align="center"
             label="单品销售额（元）"
           >
           </el-table-column>
           <el-table-column
-            prop="xiaoliang"
+            prop="numSold"
+            align="center"
             label="单品销量（件）"
           >
           </el-table-column>
           <el-table-column
-            prop="danjia"
+            prop="price"
+            align="center"
             label="单品价格（元/件）"
           >
           </el-table-column>
           <el-table-column
-            prop="zhuanhua"
+          align="center"
+            prop="conRate"
             label="转化率"
           >
           </el-table-column>
           <el-table-column
-            prop="GPM"
+            prop="gpm"
+            align="center"
             label="GMP"
           >
           </el-table-column>
@@ -196,9 +200,14 @@ export default {
       allData: null,
       anchor_detail: {
         name: "",
+        anchorId:'',
+        liveCustomerPrice:'',
         avgCustomerPrice: "",
         totalSales: "",
         totalSold: "",
+        avgOnlineViewers:'',
+        avgVisitor:'',
+        avgFansChange:'',
         numLives: "",
         avgLiveOnlineViews: "",
         avgLiveViews: "",
@@ -206,19 +215,19 @@ export default {
       value: "",
       options: [
         {
-          value: 0,
+          value: "食品",
           label: "食品",
         },
         {
-          value: 1,
+          value: "化妆品",
           label: "化妆品",
         },
         {
-          value: 2,
+          value:  "快消品",
           label: "快消品",
         },
         {
-          value: 3,
+          value: "汽车",
           label: "汽车",
         },
       ],
@@ -229,58 +238,15 @@ export default {
       chartLine2: null,
       chartLine3: null,
 
-      tabPosition: "btn1",
+      tabPosition: "conRate",
       tableData: [
-        // {
-        //   name: "网红方便面网红方便面网红方便面",
-        //   zhubo: "王小虎",
-        //   ptai: "淘宝",
-        //   date: "2016-05-02",
-        //   price: "2093",
-        //   xiaoliang: "10000",
-        //   danjia: "18.69",
-        //   zhuanhua: "1.9872%",
-        //   GPM: "19.56",
-        // },
-        // {
-        //   name: "网红方便面网红方便面网红方便面",
-        //   zhubo: "王小虎",
-        //   ptai: "淘宝",
-        //   date: "2016-05-02",
-        //   price: "2093",
-        //   xiaoliang: "10000",
-        //   danjia: "18.69",
-        //   zhuanhua: "1.9872%",
-        //   GPM: "19.56",
-        // },
-        // {
-        //   name: "网红方便面网红方便面网红方便面",
-        //   zhubo: "王小虎",
-        //   ptai: "淘宝",
-        //   date: "2016-05-02",
-        //   price: "2093",
-        //   xiaoliang: "10000",
-        //   danjia: "18.69",
-        //   zhuanhua: "1.9872%",
-        //   GPM: "19.56",
-        // },
-        // {
-        //   name: "网红方便面网红方便面网红方便面",
-        //   zhubo: "王小虎",
-        //   ptai: "淘宝",
-        //   date: "2016-05-02",
-        //   price: "2093",
-        //   xiaoliang: "10000",
-        //   danjia: "18.69",
-        //   zhuanhua: "1.9872%",
-        //   GPM: "19.56",
-        // },
+        
       ],
     };
   },
   watch: {},
   mounted() {
-     this.getDyDetails();
+     this.getDyDetails(this.value, this.tabPosition);
     setTimeout(() => {
       this.initChartLine();
       this.initChartLine1();
@@ -305,10 +271,13 @@ export default {
   computed: {},
   created() {},
   methods: {
-    getDyDetails() {
+    getDyDetails(value, tabPosition) {
       axios
         .get("http://43.254.55.231:8080/api/dy/detail", {
           params: {
+            // anchorId: '83307044560',
+             sort_field: this.tabPosition,
+            goodsType: this.value,
             anchorId: this.$route.query.id,
           },
         })
@@ -326,7 +295,11 @@ export default {
     },
     //右边切换
     handleClickRight(tab) {
-      console.log(tab);
+       this.tabPosition = tab.name;
+      this.getDyDetails(this.value, this.tabPosition)
+    },
+       goodChang(v){
+     this.getDyDetails(v, this.tabPosition)
     },
     initChartLine1() {
       const data = this.allData.customer_price;

@@ -1,10 +1,10 @@
 <template>
   <div class="title-conter">
-    <div class="title-left">网红直播带货DEO</div>
+    <div class="title-left">网红直播带货DEMO</div>
     <div class="title-box">
       <router-link :to="{name:'home'}"> 全部商品 </router-link><span></span>
-      <router-link :to="{name:'inviteList'}"> 淘宝主播 </router-link><span></span>
-      <router-link :to="{name:'rewardRecordList'}"> 抖音主播 </router-link>
+      <router-link :to="{name:'inviteList'}" > <i  :class="{ 'activeClass' : istbActive}">淘宝主播</i> </router-link><span></span>
+      <router-link :to="{name:'rewardRecordList'}" > <i  :class="{ 'activeClass' : isdyActive}">抖音主播</i>  </router-link>
       <!-- <router-link :to="{name:'detail'}"> 详情 </router-link> -->
     </div>
     <div>
@@ -29,10 +29,22 @@ export default {
   data() {
     return {
       date: "",
+      istbActive: true,
+      isdyActive:false,
     };
   },
   mounted() {
     this.getTime();
+    if(this.$route.query.name && this.$route.query.name === 'tb') {
+      this.istbActive = true;
+    } else {
+      this.istbActive = false;
+    }
+      if(this.$route.query.name && this.$route.query.name === 'dy') {
+      this.isdyActive = true;
+    } else {
+      this.isdyActive = false;
+    }
   },
   methods: {
     getTime() {
@@ -61,6 +73,12 @@ export default {
   align-items: center;
   padding: 20px 30px;
   border-bottom: 1px solid #6b6e81;
+  i{
+        font-style: normal;
+  }
+  .activeClass{
+    color:#0c87ff
+  }
   .title-box span {
     display: inline-block;
     height: 10px;

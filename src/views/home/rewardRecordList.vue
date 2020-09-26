@@ -5,12 +5,11 @@
     <div class="tabCondouyin">
       <div class="btnCon">
         <div class="option">
-          <el-input
-            placeholder="请输入搜索关键词"
-            suffix-icon="el-icon-search"
-            v-model="keyWords"
-          >
-          </el-input>
+           <el-input placeholder="请输入搜索关键词"
+          
+            v-model="keyWords" class="input-with-select">
+    <el-button slot="append" icon="el-icon-search" @click="getList(1)"></el-button>
+  </el-input>
         </div>
 
         <el-tabs
@@ -169,7 +168,8 @@ export default {
           params: {
             current_page: this.pageSize,
             page_size: this.pageNum,
-            Sort_field: this.tabPosition,
+            sort_field: this.tabPosition,
+            name: this.keyWords,
           },
         })
         .then((res) => {
@@ -185,7 +185,7 @@ export default {
     //点击主播名
     cellClick(column, cell) {
         if (cell.label == "抖音主播名") {
-        this.$router.push({path: '/detaildy', query: {id: column.anchorId}})
+        this.$router.push({path: '/detaildy', query: {id: column.anchorId, name: 'dy'}})
       }
       
     },
@@ -225,17 +225,15 @@ export default {
         color: #fff;
         height: 32px;
         line-height: 32px;
+        border-right:0
       }
       .el-input__suffix {
         right: 0;
       }
-      .el-input__icon {
-        line-height: 32px;
-        background-color: #409eff;
-        color: #fff;
-        width: 40px;
-        border-top-right-radius: 4px;
-        border-bottom-right-radius: 4px;
+      .el-input-group__append {
+    background-color: #409eff;
+    color: #fff;
+    border: 1px solid #409eff;
       }
     }
     .el-tabs--top .el-tabs__item.is-top:last-child {

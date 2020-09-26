@@ -11,6 +11,12 @@
           show-overflow-tooltip
           label="商品名称">
         </el-table-column>
+             <el-table-column
+          prop="goodsType"
+          align="center"
+          show-overflow-tooltip
+          label="品类">
+        </el-table-column>
         <el-table-column
           prop="name"
           align="center"
