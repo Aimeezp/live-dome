@@ -127,12 +127,10 @@
         </div>
         <el-table
           :data="tableData"
-           height="200px"
           style="width: 100%"
         >
           <el-table-column
             prop="goodsName"
-            show-overflow-tooltip
             label="商品名称"
           >
           </el-table-column>
@@ -279,6 +277,7 @@ export default {
              sort_field: this.tabPosition,
             goodsType: this.value,
             anchorId: this.$route.query.id,
+            page_size: 500,
           },
         })
         .then((res) => {
