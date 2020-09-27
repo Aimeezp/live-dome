@@ -9,8 +9,8 @@
             <el-option
               v-for="(item, index) in options"
               :key="index"
-              :label="item.label"
-              :value="item.value"
+              :label="item"
+              :value="item"
             >
             </el-option>
           </el-select>
@@ -57,23 +57,7 @@ export default {
     return {
       value: "",
       options: [
-        {
-          value: "食品",
-          label: "食品",
-        },
-        {
-          value: "化妆品",
-          label: "化妆品",
-        },
-        {
-          value: "快消品",
-          label: "快消品",
-        },
-        {
-          value: "汽车",
-          label: "汽车",
-        },
-      ],
+ ],
       activeName: "all",
       tabPosition: "avgCustomerPrice",
       total: 0,
@@ -85,10 +69,23 @@ export default {
   watch: {},
   mounted() {
     this.getList(this.activeName, 1, this.value);
+    this.goodTypeFun();
   },
   computed: {},
   created() {},
   methods: {
+    goodTypeFun() {
+     axios
+        .get("http://43.254.55.231:8080/api/index/goods_type_list", {
+          params: {
+          },
+        })
+        .then((res) => {
+          if (res.data.code && res.data.code == 200) {
+            this.options = res.data.data;
+          }
+        })
+    },
     cellStyle({ column }) {
       if (column.label === "带货主播") {
         return "cursor:pointer";

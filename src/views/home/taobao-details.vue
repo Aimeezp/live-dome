@@ -92,8 +92,8 @@
               <el-option
                 v-for="(item, index) in options"
                 :key="index"
-                :label="item.label"
-                :value="item.value"
+                :label="item"
+                :value="item"
               >
               </el-option>
             </el-select>
@@ -200,24 +200,7 @@ export default {
         avgLiveViews: "",
       },
       value: "",
-      options: [
-        {
-          value: "食品",
-          label: "食品",
-        },
-        {
-          value: "化妆品",
-          label: "化妆品",
-        },
-        {
-          value:  "快消品",
-          label: "快消品",
-        },
-        {
-          value: "汽车",
-          label: "汽车",
-        },
-      ],
+      options: [],
       hostName: "韩饭饭（中午12点30直播）",
       hostId: "12345",
       chartLine: null,
@@ -276,6 +259,7 @@ export default {
   },
   watch: {},
   mounted() {
+    this.goodTypeFun()
     this.getTbDetails(this.value, this.tabPosition);
     setTimeout(() => {
       this.initChartLine();
@@ -301,6 +285,18 @@ export default {
   computed: {},
   created() {},
   methods: {
+        goodTypeFun() {
+     axios
+        .get("http://43.254.55.231:8080/api/index/goods_type_list", {
+          params: {
+          },
+        })
+        .then((res) => {
+          if (res.data.code && res.data.code == 200) {
+            this.options = res.data.data;
+          }
+        })
+    },
     //获取详情
     getTbDetails(value, tabPosition) {
       axios
