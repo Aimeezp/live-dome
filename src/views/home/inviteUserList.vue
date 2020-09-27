@@ -42,7 +42,6 @@
       >
         <el-table-column
           prop="name"
-          show-overflow-tooltip
           label="淘宝主播名"
         >
         </el-table-column>
