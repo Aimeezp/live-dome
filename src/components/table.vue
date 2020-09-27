@@ -8,7 +8,6 @@
       >
         <el-table-column
           prop="goodsName"
-          show-overflow-tooltip
           label="商品名称">
         </el-table-column>
              <el-table-column
@@ -31,6 +30,7 @@
         <el-table-column
           prop="date"
           align="center"
+          width="150px"
           label="直播日期">
         </el-table-column>
         <el-table-column

@@ -102,7 +102,7 @@
         prev-text="上一页"
         next-text="下一页"
         @current-change="handleCurrentChange"
-        :page-size="pageSize"
+        :page-size="pageNum"
         layout="total, prev, pager, next"
         :total="total"
       >

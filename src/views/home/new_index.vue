@@ -69,7 +69,7 @@
       <tableCon
         @handleCurrentChange="handleCurrentChange"
         :total="total"
-        :pageSize='pageSize'
+        :pageSize='pageNum'
         :tableData="tableData"
         :cellStyle="cellStyle"
         @cellClick="cellClick"
