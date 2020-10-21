@@ -3,7 +3,7 @@
     <div class="title-left">网红直播带货DEMO</div>
     <div class="title-box">
       <router-link :to="{name:'home'}"> 全部商品 </router-link><span></span>
-      <router-link :to="{name:'deta'}"> 全部品类 </router-link><span></span>
+      <router-link :to="{name:'deta'}"> <i  :class="{ 'activeClass' : isgoodActive}">全部品类</i>  </router-link><span></span>
       <router-link :to="{name:'inviteList'}" > <i  :class="{ 'activeClass' : istbActive}">淘宝主播</i> </router-link><span></span>
       <router-link :to="{name:'rewardRecordList'}" > <i  :class="{ 'activeClass' : isdyActive}">抖音主播</i>  </router-link>
     </div>
@@ -31,6 +31,7 @@ export default {
       date: "",
       istbActive: true,
       isdyActive:false,
+      isgoodActive:false,
     };
   },
   mounted() {
@@ -44,6 +45,11 @@ export default {
       this.isdyActive = true;
     } else {
       this.isdyActive = false;
+    }
+          if(this.$route.query.name && this.$route.query.name === 'goods') {
+      this.isgoodActive = true;
+    } else {
+      this.isgoodActive = false;
     }
   },
   methods: {

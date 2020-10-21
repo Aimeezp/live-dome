@@ -2,17 +2,11 @@
   <div>
     <headerTop />
     <div class="details">
-      <el-row
-        :gutter="20"
-        class="lineOne"
-      >
+      <el-row :gutter="20" class="lineOne">
         <el-col :span="6">
           <div class="hostCon">
-            <p
-              class="host"
-              style="text-align:left"
-            >淘宝主播名称</p>
-            <p class="nam">{{anchor_detail.name}}</p>
+            <p class="host" style="text-align: left">淘宝主播名称</p>
+            <p class="nam">{{ anchor_detail.name }}</p>
             <!-- <p class="hostid">id:{{hostId}}</p> -->
           </div>
         </el-col>
@@ -21,64 +15,48 @@
             <ul class="topNum">
               <li>
                 <p>客单价</p>
-                <p class="num">{{anchor_detail.avgCustomerPrice}}</p>
+                <p class="num">{{ anchor_detail.avgCustomerPrice }}</p>
               </li>
               <li>
                 <p>总销售额</p>
-                <p class="num">{{anchor_detail.totalSales}}</p>
+                <p class="num">{{ anchor_detail.totalSales }}</p>
               </li>
               <li>
                 <p>总销量</p>
-                <p class="num">{{anchor_detail.totalSold}}</p>
+                <p class="num">{{ anchor_detail.totalSold }}</p>
               </li>
             </ul>
             <ul class="bottomNum">
               <li>
                 <p>直播次数</p>
-                <p class="num">{{anchor_detail.numLives}}</p>
+                <p class="num">{{ anchor_detail.numLives }}</p>
               </li>
               <li>
                 <p>厂均同时最高在线</p>
-                <p class="num">{{anchor_detail.avgLiveOnlineViews}}</p>
+                <p class="num">{{ anchor_detail.avgLiveOnlineViews }}</p>
               </li>
               <li>
                 <p>场均观看次数</p>
-                <p class="num">{{anchor_detail.avgLiveViews}}</p>
+                <p class="num">{{ anchor_detail.avgLiveViews }}</p>
               </li>
-
             </ul>
           </div>
         </el-col>
         <el-col :span="8">
           <div class="grid-content bg-purple">
-            <div
-              id="J_chartLineBox"
-              class="chart-box"
-            ></div>
+            <div id="J_chartLineBox" class="chart-box"></div>
           </div>
         </el-col>
       </el-row>
-      <el-row
-        :gutter="20"
-        class="lineTwo"
-      >
+      <el-row :gutter="20" class="lineTwo">
         <el-col :span="8">
-          <div
-            id="J_chartLineBox1"
-            class="chart-box"
-          ></div>
+          <div id="J_chartLineBox1" class="chart-box"></div>
         </el-col>
         <el-col :span="8">
-          <div
-            id="J_chartLineBox2"
-            class="chart-box"
-          ></div>
+          <div id="J_chartLineBox2" class="chart-box"></div>
         </el-col>
         <el-col :span="8">
-          <div
-            id="J_chartLineBox3"
-            class="chart-box"
-          ></div>
+          <div id="J_chartLineBox3" class="chart-box"></div>
         </el-col>
       </el-row>
       <div class="lineThree">
@@ -87,7 +65,7 @@
             <el-select
               v-model="value"
               placeholder="品类筛选"
-               @change="goodChang"
+              @change="goodChang"
             >
               <el-option
                 v-for="(item, index) in options"
@@ -98,59 +76,47 @@
               </el-option>
             </el-select>
           </div>
-          <el-tabs
-            v-model="tabPosition"
-            @tab-click="handleClickRight"
-          >
-            <el-tab-pane
-              label="按转化率"
-              name="conRate"
-            ></el-tab-pane>
-            <el-tab-pane
-              label="按GPM"
-              name="gpm"
-            ></el-tab-pane>
+          <el-tabs v-model="tabPosition" @tab-click="handleClickRight">
+            <el-tab-pane label="按转化率" name="conRate"></el-tab-pane>
+            <el-tab-pane label="按GPM" name="gpm"></el-tab-pane>
           </el-tabs>
         </div>
-        <div
-          class="listBtn"
-          style="margin-bottom: 30px;"
-        >
-          <p style="color:#fff">主播带货商品数据</p>
+        <div class="listBtn" style="margin-bottom: 60px">
+          <p style="color: #fff">主播带货商品数据</p>
         </div>
-        <el-table
-          :data="tableData"
-          style="width: 100%"
-        >
-          <el-table-column
-            prop="goodsName"
-            align="center"
-            label="商品名称"
-          >
+        <div class="totalCon">
+          <div>
+            <p>品类总销售额</p>
+            <span>{{totalData.total_sales}}</span>
+          </div>
+          <div>
+            <p>品类总销量</p>
+            <span>{{totalData.total_sold}}</span>
+          </div>
+          <div>
+            <p>品类客单价</p>
+            <span>{{totalData.avg_price}}</span>
+          </div>
+          <div>
+            <p>品类转化率</p>
+            <!-- <span>{{Number(totalData.con_rate*100).toFixed(1)}}%</span> -->
+            <span>{{totalData.con_rate}}</span>
+          </div>
+          <div>
+            <p>品类GPM</p>
+            <span>{{totalData.gpm}}</span>
+          </div>
+        </div>
+        <el-table :data="tableData" style="width: 100%">
+          <el-table-column prop="goodsName" align="center" label="商品名称">
           </el-table-column>
-          <el-table-column
-            prop="goodsType"
-            align="center"
-            label="品类"
-          >
+          <el-table-column prop="goodsType" align="center" label="品类">
           </el-table-column>
-          <el-table-column
-            prop="liveTime"
-            align="center"
-            label="直播日期"
-          >
+          <el-table-column prop="liveTime" align="center" label="直播日期">
           </el-table-column>
-          <el-table-column
-            prop="price"
-            align="center"
-            label="单品销售额（元）"
-          >
+          <el-table-column prop="price" align="center" label="单品销售额（元）">
           </el-table-column>
-          <el-table-column
-            prop="numSold"
-            align="center"
-            label="单品销量（件）"
-          >
+          <el-table-column prop="numSold" align="center" label="单品销量（件）">
           </el-table-column>
           <el-table-column
             prop="numSales"
@@ -158,23 +124,13 @@
             label="单品价格（元/件）"
           >
           </el-table-column>
-          <el-table-column
-            prop="conRate"
-            align="center"
-            label="转化率"
-          >
+          <el-table-column prop="conRate" align="center" label="转化率">
           </el-table-column>
-          <el-table-column
-            prop="gpm"
-            label="GMP"
-            align="center"
-          >
+          <el-table-column prop="gpm" label="GMP" align="center">
           </el-table-column>
         </el-table>
       </div>
-
     </div>
-
   </div>
 </template>
 
@@ -190,6 +146,13 @@ export default {
   data() {
     return {
       allData: null,
+      totalData:{
+       total_sales:'13亿',
+       total_sold: '2133',
+       avg_price:'344',
+       con_rate: '0.3',
+       gpm: '355',
+      },
       anchor_detail: {
         name: "",
         avgCustomerPrice: "",
@@ -259,7 +222,7 @@ export default {
   },
   watch: {},
   mounted() {
-    this.goodTypeFun()
+    this.goodTypeFun();
     this.getTbDetails(this.value, this.tabPosition);
     setTimeout(() => {
       this.initChartLine();
@@ -285,17 +248,16 @@ export default {
   computed: {},
   created() {},
   methods: {
-        goodTypeFun() {
-     axios
+    goodTypeFun() {
+      axios
         .get("http://43.254.55.231:8080/api/index/goods_type_list", {
-          params: {
-          },
+          params: {},
         })
         .then((res) => {
           if (res.data.code && res.data.code == 200) {
             this.options = res.data.data;
           }
-        })
+        });
     },
     //获取详情
     getTbDetails(value, tabPosition) {
@@ -305,10 +267,11 @@ export default {
             anchorId: this.$route.query.id,
             sort_field: this.tabPosition,
             goodsType: this.value,
-             page_size: 500,
+            page_size: 500,
           },
         })
         .then((res) => {
+          this.totalData = res.data.data.type_total;
           if (res.data.code && res.data.code == 200) {
             this.allData = res.data.data;
             this.anchor_detail = res.data.data.anchor_detail;
@@ -320,13 +283,13 @@ export default {
           console.log("获取数据失败");
         });
     },
-    goodChang(v){
-     this.getTbDetails(v, this.tabPosition)
+    goodChang(v) {
+      this.getTbDetails(v, this.tabPosition);
     },
     //右边切换
     handleClickRight(tab) {
       this.tabPosition = tab.name;
-      this.getTbDetails(this.value, this.tabPosition)
+      this.getTbDetails(this.value, this.tabPosition);
     },
     initChartLine1() {
       const data = this.allData.customer_price;
@@ -853,7 +816,7 @@ export default {
       background: #262837;
       border-radius: 10px;
       text-align: center;
-          height: 250px;
+      height: 250px;
       .nam {
         padding: 82px 0 40px;
         font-size: 18px;
@@ -907,6 +870,30 @@ export default {
     padding: 10px;
     background: #262837;
     border-radius: 10px;
+    .totalCon {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+     background-color: #323448;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+        padding: 8px 20px;
+      > div {
+        padding: 5px 20px;
+        text-align: center;
+        color: #6f717e;
+        font-size: 12px;
+        line-height: 28px;
+        p {
+          
+        }
+        span {
+          color: #fff;
+        }
+      }
+    }
     .el-tabs__header {
       margin: 0;
     }

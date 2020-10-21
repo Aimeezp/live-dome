@@ -14,42 +14,40 @@
         </el-tabs>
       </div>
       <div class="listBtn">
-         <p style="color:#409eff">品类：{{goodsName}}</p>
+         <p style="color:#0c87ff">品类：{{goodsName}}</p>
       </div>
       <el-table
         :data="tableData"
         style="width: 100%"
-        :cell-style="cellStyle"
-        @cell-click="cellClick"
       >
         <el-table-column
-          prop="goodsName"
-          label="品类">
+          type="index"
+          label="序号">
         </el-table-column>
         <el-table-column
-          prop="name"
+          prop="totalSales"
           align="center"
           show-overflow-tooltip
           label="品类销售额（元）">
         </el-table-column>
         <el-table-column
-          prop="source"
+          prop="totalSold"
           align="center"
           label="品类销量（件）">
         </el-table-column>
         <el-table-column
-          prop="date"
+          prop="price"
           align="center"
           width="150px"
           label="品类单价（元/件）">
         </el-table-column>
         <el-table-column
-          prop="numSales"
+          prop="conRate"
           align="center"
           label="转化率">
         </el-table-column>
         <el-table-column
-          prop="numSold"
+          prop="gpm"
           align="center"
           label="GPM">
         </el-table-column>
@@ -59,7 +57,7 @@
       prev-text="上一页"
       next-text="下一页"
       @current-change="handleCurrentChange"
-      :page-size="pageSize"
+      :page-size="pageNum"
       layout="total, prev, pager, next"
       :total="total">
     </el-pagination>
@@ -93,22 +91,7 @@ export default {
   computed: {},
   created() {},
   methods: {
-    cellStyle({ column }) {
-      if (column.label === "带货主播") {
-        return "cursor:pointer";
-      }
-      return false;
-    },
-    cellClick(column, cell) {
 
-      if (cell.label == "带货主播") {
-     if(column.source === "淘宝"){
-          this.$router.push({path: '/detailtb', query: {id: column.anchorId}})
-        }  else{
-           this.$router.push({path: '/detaildy', query: {id: column.anchorId}})
-        } 
-      }
-    },
     // 全部/淘宝/抖音tab切换
     handleClick(tab) {
       console.log(tab);
@@ -119,7 +102,6 @@ export default {
     handleClickRight(tab) {
       this.tabPosition = tab.name;
       this.getList(this.activeName, this.pageNum,this.tabPosition);
-      console.log(tab);
     },
     goodChang(v) {
       this.getList(this.activeName, this.pageNum, v, this.tabPosition);
@@ -127,8 +109,9 @@ export default {
     //列表方法
     getList(name, pageNum, goodType, tabPosition) {
       axios
-        .get("http://43.254.55.231:8080/api/index/list", {
+        .get("http://43.254.55.231:8080/api/cate/detail", {
           params: {
+             goodsType: this.$route.query.goodsType,
             current_page: this.pageSize,
             page_size: this.pageNum,
             type: this.activeName,
@@ -136,9 +119,12 @@ export default {
           },
         })
         .then((res) => {
+          console.log(res)
+               this.goodsName = res.data.data.goods_type
+            this.tableData = res.data.data.list.list;
+            this.total = res.data.data.list.total;
           if (res.data.code && res.data.code == 200) {
-            this.tableData = res.data.data.list;
-            this.total = res.data.data.total;
+       
           }
         })
         .catch((e) => {

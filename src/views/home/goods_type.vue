@@ -26,33 +26,36 @@
         @cell-click="cellClick"
       >
         <el-table-column
-          prop="goodsName"
+          prop="goodsType"
           label="品类">
         </el-table-column>
         <el-table-column
-          prop="name"
+          prop="total_sales"
           align="center"
           show-overflow-tooltip
           label="品类销售额（元）">
         </el-table-column>
         <el-table-column
-          prop="source"
+          prop="total_sold"
           align="center"
           label="品类销量（件）">
         </el-table-column>
         <el-table-column
-          prop="date"
+          prop="avg_price"
           align="center"
           width="150px"
           label="品类单价（元/件）">
         </el-table-column>
         <el-table-column
-          prop="numSales"
+          prop="avg_rate"
           align="center"
           label="转化率">
+          <!-- <template slot-scope="scope">
+            <span>{{Number(scope.row.avg_rate*100).toFixed(1)}}%</span>
+          </template> -->
         </el-table-column>
         <el-table-column
-          prop="numSold"
+          prop="avg_pm"
           align="center"
           label="GPM">
         </el-table-column>
@@ -62,7 +65,7 @@
       prev-text="上一页"
       next-text="下一页"
       @current-change="handleCurrentChange"
-      :page-size="pageSize"
+      :page-size="pageNum"
       layout="total, prev, pager, next"
       :total="total">
     </el-pagination>
@@ -105,7 +108,7 @@ export default {
     cellClick(column, cell) {
 
       if (cell.label == "品类") {
-        this.$router.push({path: '/goods-type-details', query: {id: column.anchorId}})
+        this.$router.push({path: '/goods-type-details', query: {name:'goods', goodsType: column.goodsType}})
       }
     },
     // 全部/淘宝/抖音tab切换
@@ -126,7 +129,7 @@ export default {
     //列表方法
     getList(name, pageNum, goodType, tabPosition) {
       axios
-        .get("http://43.254.55.231:8080/api/index/list", {
+        .get("http://43.254.55.231:8080/api/cate/index", {
           params: {
             current_page: this.pageSize,
             page_size: this.pageNum,

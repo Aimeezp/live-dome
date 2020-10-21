@@ -16,18 +16,11 @@
           v-model="tabPosition"
           @tab-click="handleClickRight"
         >
-          <el-tab-pane
-            label="按客单价"
-            name="avgCustomerPrice"
-          ></el-tab-pane>
-          <el-tab-pane
-            label="按总销售额"
-            name="totalSales"
-          ></el-tab-pane>
-          <el-tab-pane
-            label="按总销量"
-            name="totalSold"
-          ></el-tab-pane>
+         <el-tab-pane label="按客单价" name="avgCustomerPrice"></el-tab-pane>
+          <el-tab-pane label="按总销售额" name="totalSales"></el-tab-pane>
+          <el-tab-pane label="按总销量" name="totalSold"></el-tab-pane>
+          <el-tab-pane label="按转化率" name="conRate"></el-tab-pane>
+          <el-tab-pane label="按GPM" name="gpm"></el-tab-pane>
         </el-tabs>
       </div>
       <div

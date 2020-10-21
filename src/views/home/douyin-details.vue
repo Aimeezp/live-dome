@@ -121,9 +121,32 @@
         </div>
         <div
           class="listBtn"
-          style="margin-bottom: 30px;"
+          style="margin-bottom: 60px;"
         >
           <p style="color:#fff">主播带货商品数据</p>
+        </div>
+          <div class="totalCon">
+          <div>
+            <p>品类总销售额</p>
+            <span>{{totalData.total_sales}}</span>
+          </div>
+          <div>
+            <p>品类总销量</p>
+            <span>{{totalData.total_sold}}</span>
+          </div>
+          <div>
+            <p>品类客单价</p>
+            <span>{{totalData.avg_price}}</span>
+          </div>
+          <div>
+            <p>品类转化率</p>
+            <!-- <span>{{Number(totalData.con_rate*100).toFixed(1)}}%</span> -->
+            <span>{{totalData.con_rate}}</span>
+          </div>
+          <div>
+            <p>品类GPM</p>
+            <span>{{totalData.gpm}}</span>
+          </div>
         </div>
         <el-table
           :data="tableData"
@@ -196,6 +219,13 @@ export default {
   data() {
     return {
       allData: null,
+       totalData:{
+       total_sales:'13亿',
+       total_sold: '2133',
+       avg_price:'344',
+       con_rate: '0.3',
+       gpm: '355',
+      },
       anchor_detail: {
         name: "",
         anchorId:'',
@@ -279,6 +309,7 @@ export default {
           },
         })
         .then((res) => {
+          this.totalData = res.data.data.type_total;
           if (res.data.code && res.data.code == 200) {
             this.allData = res.data.data;
             this.anchor_detail = res.data.data.anchor_detail;
@@ -877,6 +908,30 @@ export default {
     padding: 10px;
     background: #262837;
     border-radius: 10px;
+        .totalCon {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+     background-color: #323448;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+        padding: 8px 20px;
+      > div {
+        padding: 5px 20px;
+        text-align: center;
+        color: #6f717e;
+        font-size: 12px;
+        line-height: 28px;
+        p {
+          
+        }
+        span {
+          color: #fff;
+        }
+      }
+    }
     .el-tabs__header {
       margin: 0;
     }
