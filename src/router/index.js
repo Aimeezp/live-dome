@@ -2,6 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 import NewHome from '@/views/home/new_index'
+import goodsType from '@/views/home/goods_type'
+import goodsTypeDetails from '@/views/home/goodsType_details'
 
 import inviteList from '@/views/home/inviteUserList'
 import rewardRecordList from '@/views/home/rewardRecordList'
@@ -19,6 +21,28 @@ export default new Router({
         index: 0,
         footer: false,
         title: '全部',
+        keepAlive: true, // 需要被缓存
+      }
+    },
+    {
+      path: '/goodstype',
+      name: 'deta',
+      component: goodsType,
+      meta: {
+        index: 1,
+        footer: false,
+        title: '品类',
+        keepAlive: true, // 需要被缓存
+      }
+    },
+    {
+      path: '/goods-type-details',
+      name: 'det',
+      component: goodsTypeDetails,
+      meta: {
+        index: 1,
+        footer: false,
+        title: '品类详情',
         keepAlive: true, // 需要被缓存
       }
     },

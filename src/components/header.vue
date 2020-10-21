@@ -3,9 +3,9 @@
     <div class="title-left">网红直播带货DEMO</div>
     <div class="title-box">
       <router-link :to="{name:'home'}"> 全部商品 </router-link><span></span>
+      <router-link :to="{name:'deta'}"> 全部品类 </router-link><span></span>
       <router-link :to="{name:'inviteList'}" > <i  :class="{ 'activeClass' : istbActive}">淘宝主播</i> </router-link><span></span>
       <router-link :to="{name:'rewardRecordList'}" > <i  :class="{ 'activeClass' : isdyActive}">抖音主播</i>  </router-link>
-      <!-- <router-link :to="{name:'detail'}"> 详情 </router-link> -->
     </div>
     <div>
       <el-date-picker
