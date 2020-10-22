@@ -58,12 +58,12 @@
           label="平均观场"
         >
         </el-table-column>
-        <el-table-column
+        <!-- <el-table-column
           align="center"
           prop="avgFansChange"
           label="平均粉丝增加"
         >
-        </el-table-column>
+        </el-table-column> -->
         <el-table-column
           prop="numLives"
           align="center"
@@ -83,11 +83,23 @@
         >
         </el-table-column>
         <el-table-column
+          prop="conRate"
+          align="center"
+          label="转化率"
+        >
+        </el-table-column>
+         <el-table-column
+          prop="gpm"
+          align="center"
+          label="GPM"
+        >
+        </el-table-column>
+        <!-- <el-table-column
           prop="totalSound"
           align="center"
           label="音浪收入"
         >
-        </el-table-column>
+        </el-table-column> -->
       </el-table>
       <el-pagination
         background

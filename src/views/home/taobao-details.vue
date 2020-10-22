@@ -114,12 +114,12 @@
           </el-table-column>
           <el-table-column prop="liveTime" align="center" label="直播日期">
           </el-table-column>
-          <el-table-column prop="price" align="center" label="单品销售额（元）">
+          <el-table-column prop="numSales" align="center" label="单品销售额（元）">
           </el-table-column>
           <el-table-column prop="numSold" align="center" label="单品销量（件）">
           </el-table-column>
           <el-table-column
-            prop="numSales"
+            prop="price"
             align="center"
             label="单品价格（元/件）"
           >
@@ -251,7 +251,10 @@ export default {
     goodTypeFun() {
       axios
         .get("http://43.254.55.231:8080/api/index/goods_type_list", {
-          params: {},
+          params: {
+anchorId: this.$route.query.id,
+type: this.$route.query.name,
+          },
         })
         .then((res) => {
           if (res.data.code && res.data.code == 200) {

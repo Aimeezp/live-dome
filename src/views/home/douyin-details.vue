@@ -289,6 +289,8 @@ export default {
      axios
         .get("http://43.254.55.231:8080/api/index/goods_type_list", {
           params: {
+            anchorId: this.$route.query.id,
+type: this.$route.query.name,
           },
         })
         .then((res) => {

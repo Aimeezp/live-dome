@@ -69,9 +69,15 @@
         >
         </el-table-column>
         <el-table-column
-          prop="totalSold"
+          prop="conRate"
           align="center"
-          label="总销售量（件）"
+          label="转化率"
+        >
+        </el-table-column>
+         <el-table-column
+          prop="gpm"
+          align="center"
+          label="GPM"
         >
         </el-table-column>
       </el-table>

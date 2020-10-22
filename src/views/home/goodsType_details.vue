@@ -25,9 +25,13 @@
           label="序号">
         </el-table-column>
         <el-table-column
+          prop="name"
+          align="center"
+          label="主播名称">
+        </el-table-column>
+        <el-table-column
           prop="totalSales"
           align="center"
-          show-overflow-tooltip
           label="品类销售额（元）">
         </el-table-column>
         <el-table-column
