@@ -96,9 +96,9 @@ export default {
 
       if (cell.label == "带货主播") {
      if(column.source === "淘宝"){
-          this.$router.push({path: '/detailtb', query: {id: column.anchorId}})
+          this.$router.push({path: '/detailtb', query: {id: column.anchorId, name:'tb'}})
         }  else{
-           this.$router.push({path: '/detaildy', query: {id: column.anchorId}})
+           this.$router.push({path: '/detaildy', query: {id: column.anchorId, name:'dy'}})
         } 
       }
     },

@@ -249,6 +249,7 @@ export default {
   created() {},
   methods: {
     goodTypeFun() {
+      console.log(this.$route.query.name)
       axios
         .get("http://43.254.55.231:8080/api/index/goods_type_list", {
           params: {

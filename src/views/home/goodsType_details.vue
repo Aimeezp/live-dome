@@ -18,6 +18,8 @@
       </div>
       <el-table
         :data="tableData"
+         :cell-style="cellStyle"
+        @cell-click="cellClick"
         style="width: 100%"
       >
         <el-table-column
@@ -95,7 +97,22 @@ export default {
   computed: {},
   created() {},
   methods: {
+   cellStyle({ column }) {
+      if (column.label === '主播名称') {
+        return "cursor:pointer";
+      }
+      return false;
+    },
+        cellClick(column, cell) {
 
+      if (cell.label == "主播名称") {
+     if(column.source === "淘宝"){
+          this.$router.push({path: '/detailtb', query: {id: column.anchorId, name:'tb'}})
+        }  else{
+           this.$router.push({path: '/detaildy', query: {id: column.anchorId, name:'dy'}})
+        } 
+      }
+    },
     // 全部/淘宝/抖音tab切换
     handleClick(tab) {
       console.log(tab);
