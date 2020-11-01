@@ -364,8 +364,8 @@ type: this.$route.query.name,
         },
         grid: {
           left: "0",
-          bottom: "0",
-          right: "0",
+          bottom: "0", 
+          right: "18",
           containLabel: true,
         },
         xAxis: {
@@ -373,7 +373,7 @@ type: this.$route.query.name,
           axisLabel: {
             interval: 0,
             textStyle: {
-              fontSize: "6",
+              // fontSize: "6",
             },
           },
           axisTick: {
@@ -499,7 +499,7 @@ type: this.$route.query.name,
           axisLabel: {
             interval: 0,
             textStyle: {
-              fontSize: "6",
+              // fontSize: "6",
             },
           },
           splitLine: {
@@ -611,7 +611,7 @@ type: this.$route.query.name,
         grid: {
           left: "0",
           bottom: "0",
-          right: "0",
+          right: "18",
           containLabel: true,
         },
         xAxis: {
@@ -619,7 +619,7 @@ type: this.$route.query.name,
           axisLabel: {
             interval: 0,
             textStyle: {
-              fontSize: "6",
+              // fontSize: "6",
             },
           },
           axisTick: {
@@ -733,7 +733,7 @@ type: this.$route.query.name,
         grid: {
           left: "0",
           bottom: "0",
-          right: "0",
+          right: "18",
           containLabel: true,
         },
         xAxis: {
@@ -741,7 +741,7 @@ type: this.$route.query.name,
           axisLabel: {
             interval: 0,
             textStyle: {
-              fontSize: "6",
+              // fontSize: "6",
             },
           },
           axisTick: {

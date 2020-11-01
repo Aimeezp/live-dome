@@ -38,6 +38,7 @@
         :tableData="tableData"
         :cellStyle="cellStyle"
         @cellClick="cellClick"
+        :currentPage="pageSize"
       ></tableCon>
     </div>
   </div>
@@ -104,9 +105,9 @@ export default {
     },
     // 全部/淘宝/抖音tab切换
     handleClick(tab) {
-      console.log(tab);
       this.activeName = tab.name;
-      this.getList(this.activeName, 1, this.value, this.tabPosition);
+      this.pageSize = 1
+      this.getList(this.activeName,1, this.value, this.tabPosition);
     },
     //右边切换
     handleClickRight(tab) {
@@ -118,7 +119,7 @@ export default {
       this.getList(this.activeName, this.pageNum, v, this.tabPosition);
     },
     //列表方法
-    getList(name, pageNum, goodType, tabPosition) {
+    getList(name, pageSize, goodType, tabPosition) {
       axios
         .get("http://43.254.55.231:8080/api/index/list", {
           params: {

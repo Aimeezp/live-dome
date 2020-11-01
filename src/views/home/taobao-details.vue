@@ -108,7 +108,7 @@
           </div>
         </div>
         <el-table :data="tableData" style="width: 100%">
-          <el-table-column prop="goodsName" align="center" label="商品名称">
+          <el-table-column prop="goodsName"  label="商品名称">
           </el-table-column>
           <el-table-column prop="goodsType" align="center" label="品类">
           </el-table-column>
@@ -329,7 +329,7 @@ type: this.$route.query.name,
         grid: {
           left: "0",
           bottom: "0",
-          right: "0",
+          right: "18",
           containLabel: true,
         },
         xAxis: {
@@ -337,7 +337,7 @@ type: this.$route.query.name,
           axisLabel: {
             interval: 0,
             textStyle: {
-              fontSize: "6",
+              // fontSize: "6",
             },
           },
           axisTick: {
@@ -463,7 +463,7 @@ type: this.$route.query.name,
           axisLabel: {
             interval: 0,
             textStyle: {
-              fontSize: "6",
+              // fontSize: "6",
             },
           },
           splitLine: {
@@ -575,7 +575,7 @@ type: this.$route.query.name,
         grid: {
           left: "0",
           bottom: "0",
-          right: "0",
+          right: "18",
           containLabel: true,
         },
         xAxis: {
@@ -583,7 +583,7 @@ type: this.$route.query.name,
           axisLabel: {
             interval: 0,
             textStyle: {
-              fontSize: "6",
+              // fontSize: "6",
             },
           },
           axisTick: {
@@ -697,7 +697,7 @@ type: this.$route.query.name,
         grid: {
           left: "0",
           bottom: "0",
-          right: "0",
+          right: "18",
           containLabel: true,
         },
         xAxis: {
@@ -705,7 +705,7 @@ type: this.$route.query.name,
           axisLabel: {
             interval: 0,
             textStyle: {
-              fontSize: "6",
+              // fontSize: "6",
             },
           },
           axisTick: {

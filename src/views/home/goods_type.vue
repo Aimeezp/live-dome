@@ -66,6 +66,7 @@
       next-text="下一页"
       @current-change="handleCurrentChange"
       :page-size="pageNum"
+      :current-page = "pageSize"
       layout="total, prev, pager, next"
       :total="total">
     </el-pagination>
@@ -114,6 +115,7 @@ export default {
     // 全部/淘宝/抖音tab切换
     handleClick(tab) {
       console.log(tab);
+      this.pageSize = 1
       this.activeName = tab.name;
       this.getList(this.activeName, 1,this.tabPosition);
     },

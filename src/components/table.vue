@@ -48,7 +48,7 @@
           align="center"
           label="单品价格（元/件）">
         </el-table-column>
-        <el-table-column
+        <!-- <el-table-column
           prop="conRate"
           align="center"
           label="转化率">
@@ -57,7 +57,7 @@
           prop="gpm"
           align="center"
           label="GMP">
-        </el-table-column>
+        </el-table-column> -->
     </el-table>
     <el-pagination
       background
@@ -65,6 +65,7 @@
       next-text="下一页"
       @current-change="handleCurrentChange"
       :page-size="pageSize"
+      :current-page = "currentPage"
       layout="total, prev, pager, next"
       :total="total">
     </el-pagination>
@@ -78,7 +79,7 @@ export default {
       
     };
   },
-  props: ['total', 'tableData', 'pageSize', 'cellStyle'],
+  props: ['total', 'tableData', 'pageSize', 'cellStyle', 'currentPage'],
   methods: {
     // 获取当前页
     handleCurrentChange(val){
