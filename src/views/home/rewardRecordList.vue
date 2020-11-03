@@ -42,14 +42,14 @@
         </el-table-column>
         <el-table-column
           align="center"
-          prop="customerPrice"
+          prop="avgCustomerPrice"
           label="客单价（元/单）"
         >
         </el-table-column>
         <el-table-column
           align="center"
           prop="avgOnlineViewers"
-          label="厂均同时最高在线（人）"
+          label="场均同时最高在线（人）"
         >
         </el-table-column>
         <el-table-column

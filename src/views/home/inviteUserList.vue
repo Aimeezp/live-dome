@@ -47,7 +47,7 @@
         <el-table-column
           align="center"
           prop="avgLiveOnlineViews"
-          label="厂均同时最高在线（人）"
+          label="场均同时最高在线（人）"
         >
         </el-table-column>
         <el-table-column
@@ -60,6 +60,12 @@
           align="center"
           prop="numLives"
           label="直播次数"
+        >
+        </el-table-column>
+          <el-table-column
+          prop="totalSold"
+          align="center"
+          label="总销量（件）"
         >
         </el-table-column>
         <el-table-column

@@ -13,7 +13,7 @@
               style="text-align:left"
             >抖音主播名称</p>
             <p class="nam">{{anchor_detail.name}}</p>
-            <p class="hostid">id:{{anchor_detail.anchorId}}</p>
+            <!-- <p class="hostid">id:{{anchor_detail.anchorId}}</p> -->
           </div>
         </el-col>
         <el-col :span="10">
@@ -45,14 +45,14 @@
                 <p>平均场观</p>
                 <p class="num">{{anchor_detail.avgVisitor}}</p>
               </li>
-              <li>
+              <!-- <li>
                 <p>平均粉丝增加</p>
                 <p class="num">{{anchor_detail.avgFansChange}}</p>
               </li>
               <li>
                 <p>音浪收入</p>
                 <p class="num">{{anchor_detail.totalSound}}</p>
-              </li>
+              </li> -->
             </ul>
           </div>
         </el-col>
@@ -109,21 +109,18 @@
             v-model="tabPosition"
             @tab-click="handleClickRight"
           >
-            <el-tab-pane
-              label="按转化率"
-              name="conRate"
-            ></el-tab-pane>
-            <el-tab-pane
-              label="按GPM"
-              name="gpm"
-            ></el-tab-pane>
+             <el-tab-pane label="按品类单价" name="avgCustomerPrice"></el-tab-pane>
+          <el-tab-pane label="按品类销售额" name="totalSales"></el-tab-pane>
+          <el-tab-pane label="按品类销量" name="totalSold"></el-tab-pane>
+          <el-tab-pane label="按转化率" name="conRate"></el-tab-pane>
+          <el-tab-pane label="按GPM" name="gpm"></el-tab-pane>
           </el-tabs>
         </div>
         <div
           class="listBtn"
           style="margin-bottom: 60px;"
         >
-          <p style="color:#fff">主播带货商品数据</p>
+          <p style="color:#fff">主播带货品类</p>
         </div>
           <div class="totalCon">
           <div>
@@ -153,52 +150,36 @@
           style="width: 100%"
         >
           <el-table-column
-            prop="goodsName"
-            label="商品名称"
-          >
-          </el-table-column>
-          <el-table-column
-            prop="goodsType"
-            align="center"
-            label="品类"
-          >
-          </el-table-column>
-          <el-table-column
-            prop="date"
-            align="center"
-            label="直播日期"
-          >
-          </el-table-column>
-          <el-table-column
-            prop="numSales"
-            align="center"
-            label="单品销售额（元）"
-          >
-          </el-table-column>
-          <el-table-column
-            prop="numSold"
-            align="center"
-            label="单品销量（件）"
-          >
-          </el-table-column>
-          <el-table-column
-            prop="price"
-            align="center"
-            label="单品价格（元/件）"
-          >
-          </el-table-column>
-          <el-table-column
+          prop="goodsType"
+          label="品类">
+        </el-table-column>
+        <el-table-column
+          prop="total_sales"
           align="center"
-            prop="conRate"
-            label="转化率"
-          >
-          </el-table-column>
-          <el-table-column
-            prop="gpm"
-            align="center"
-            label="GMP"
-          >
-          </el-table-column>
+          show-overflow-tooltip
+          label="品类销售额（元）">
+        </el-table-column>
+        <el-table-column
+          prop="total_sold"
+          align="center"
+          label="品类销量（件）">
+        </el-table-column>
+        <el-table-column
+          prop="avg_price"
+          align="center"
+          width="150px"
+          label="品类单价（元/件）">
+        </el-table-column>
+        <el-table-column
+          prop="avg_rate"
+          align="center"
+          label="转化率">
+        </el-table-column>
+        <el-table-column
+          prop="avg_pm"
+          align="center"
+          label="GPM">
+        </el-table-column>
         </el-table>
       </div>
 

@@ -8,6 +8,7 @@
       >
         <el-table-column
           prop="goodsName"
+          width="300"
           label="商品名称">
         </el-table-column>
              <el-table-column
