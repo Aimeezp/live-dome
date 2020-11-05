@@ -110,7 +110,8 @@
             <span>{{totalData.gpm}}</span>
           </div>
         </div>
-        <el-table :data="tableData" style="width: 100%">
+        <el-table :data="tableData" style="width: 100%" :cell-style="cellStyle"
+        @cell-click="cellClick">
          <el-table-column
           prop="goodsType"
           label="品类">
@@ -262,6 +263,19 @@ export default {
   computed: {},
   created() {},
   methods: {
+      cellStyle({ column }) {
+      if (column.label === '品类') {
+        return "cursor:pointer";
+      }
+      return false;
+    },
+        //点击品类
+    cellClick(column, cell) {
+        if (cell.label == "品类") {
+          this.$router.push({path: '/taobao-type', query: {id: this.$route.query.id, name: 'tb',goodsType: column.goodsType}})
+        }
+      
+    },
     goodTypeFun() {
       console.log(this.$route.query.name)
       axios

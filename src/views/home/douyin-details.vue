@@ -148,6 +148,8 @@
         <el-table
           :data="tableData"
           style="width: 100%"
+           :cell-style="cellStyle"
+        @cell-click="cellClick"
         >
           <el-table-column
           prop="goodsType"
@@ -266,6 +268,19 @@ export default {
   computed: {},
   created() {},
   methods: {
+          cellStyle({ column }) {
+      if (column.label === '品类') {
+        return "cursor:pointer";
+      }
+      return false;
+    },
+        //点击品类
+    cellClick(column, cell) {
+        if (cell.label == "品类") {
+        this.$router.push({path: '/douyin-type', query: {id: this.$route.query.id, name: 'dy',goodsType: column.goodsType}})
+      }
+      
+    },
             goodTypeFun() {
      axios
         .get("http://43.254.55.231:8080/api/index/goods_type_list", {
