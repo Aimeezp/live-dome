@@ -154,7 +154,7 @@ export default {
              type: this.$route.query.name,
             current_page: this.pageSize,
             page_size: this.pageNum,
-            type: this.activeName,
+            // type: this.activeName,
             sort_field: this.tabPosition,
           },
         })

@@ -87,7 +87,7 @@
         <div class="listBtn" style="margin-bottom: 60px">
           <p style="color: #fff">主播带货品类</p>
         </div>
-        <div class="totalCon">
+        <!-- <div class="totalCon">
           <div>
             <p>品类总销售额</p>
             <span>{{totalData.total_sales}}</span>
@@ -102,14 +102,13 @@
           </div>
           <div>
             <p>品类转化率</p>
-            <!-- <span>{{Number(totalData.con_rate*100).toFixed(1)}}%</span> -->
             <span>{{totalData.con_rate}}</span>
           </div>
           <div>
             <p>品类GPM</p>
             <span>{{totalData.gpm}}</span>
           </div>
-        </div>
+        </div> -->
         <el-table :data="tableData" style="width: 100%" :cell-style="cellStyle"
         @cell-click="cellClick">
          <el-table-column
@@ -908,9 +907,9 @@ type: this.$route.query.name,
       left: 50%;
       transform: translateX(-50%);
       display: flex;
-     background-color: #323448;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
+      background-color: #323448;
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
         padding: 8px 20px;
       > div {
         padding: 5px 20px;
@@ -1028,5 +1027,12 @@ type: this.$route.query.name,
       width: 0 !important;
     }
   }
+  
 }
+// @media screen and (max-width: 1260px){
+//     .totalCon{
+//       left: 150px !important;
+//       transform: translateX(0%) !important;
+//     }
+// }
 </style>

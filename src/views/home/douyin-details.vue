@@ -122,7 +122,7 @@
         >
           <p style="color:#fff">主播带货品类</p>
         </div>
-          <div class="totalCon">
+        <!-- <div class="totalCon">
           <div>
             <p>品类总销售额</p>
             <span>{{totalData.total_sales}}</span>
@@ -137,14 +137,13 @@
           </div>
           <div>
             <p>品类转化率</p>
-            <!-- <span>{{Number(totalData.con_rate*100).toFixed(1)}}%</span> -->
             <span>{{totalData.con_rate}}</span>
           </div>
           <div>
             <p>品类GPM</p>
             <span>{{totalData.gpm}}</span>
           </div>
-        </div>
+        </div> -->
         <el-table
           :data="tableData"
           style="width: 100%"
