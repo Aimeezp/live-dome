@@ -112,8 +112,8 @@ export default {
     //右边切换
     handleClickRight(tab) {
       this.tabPosition = tab.name;
+      this.pageSize = 1
       this.getList(this.activeName, this.pageNum, this.value, this.tabPosition);
-      console.log(tab);
     },
     goodChang(v) {
       this.getList(this.activeName, this.pageNum, v, this.tabPosition);

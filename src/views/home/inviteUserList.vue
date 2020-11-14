@@ -95,6 +95,7 @@
         :page-size="pageNum"
         layout="total, prev, pager, next"
         :total="total"
+        :current-page = "pageSize"
       >
       </el-pagination>
     </div>
@@ -147,6 +148,7 @@ export default {
     },
     handleClickRight(tab) {
       this.tabPosition = tab.name;
+      this.pageSize =1
       this.getList(this.tabPosition, 1);
     },
     cellClick(column, cell) {

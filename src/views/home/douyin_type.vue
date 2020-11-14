@@ -93,6 +93,7 @@
       @current-change="handleCurrentChange"
       :page-size="pageNum"
       layout="total, prev, pager, next"
+      :current-page = "pageSize"
       :total="total">
     </el-pagination>
     </div>
@@ -137,6 +138,7 @@ export default {
     //右边切换
     handleClickRight(tab) {
       this.tabPosition = tab.name;
+        this.pageSize =1
       this.getList(this.activeName, this.pageNum,this.tabPosition);
     },
     goodChang(v) {

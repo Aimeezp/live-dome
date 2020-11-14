@@ -109,12 +109,11 @@ export default {
     cellClick(column, cell) {
 
       if (cell.label == "品类") {
-        this.$router.push({path: '/goods-type-details', query: {name:'goods', goodsType: column.goodsType}})
+        this.$router.push({path: '/goods-type-details', query: {name:'goods', goodsType: column.goodsType, type:column.type}})
       }
     },
     // 全部/淘宝/抖音tab切换
     handleClick(tab) {
-      console.log(tab);
       this.pageSize = 1
       this.activeName = tab.name;
       this.getList(this.activeName, 1,this.tabPosition);
@@ -122,8 +121,8 @@ export default {
     //右边切换
     handleClickRight(tab) {
       this.tabPosition = tab.name;
+      this.pageSize = 1
       this.getList(this.activeName, this.pageNum,this.tabPosition);
-      console.log(tab);
     },
     goodChang(v) {
       this.getList(this.activeName, this.pageNum, v, this.tabPosition);

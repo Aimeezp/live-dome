@@ -66,6 +66,7 @@
       @current-change="handleCurrentChange"
       :page-size="pageNum"
       layout="total, prev, pager, next"
+       :current-page = "pageSize"
       :total="total">
     </el-pagination>
     </div>
@@ -83,7 +84,6 @@ export default {
   data() {
     return {
       goodsName:'食品',
-      activeName: "tb",
       tabPosition: "avgCustomerPrice",
       total: 0,
       pageSize: 1,
@@ -93,7 +93,7 @@ export default {
   },
   watch: {},
   mounted() {
-    this.getList(this.activeName, 1);
+    this.getList(1);
   },
   computed: {},
   created() {},
@@ -114,34 +114,28 @@ export default {
         } 
       }
     },
-    // 全部/淘宝/抖音tab切换
-    handleClick(tab) {
-      console.log(tab);
-      this.activeName = tab.name;
-      this.getList(this.activeName, 1,this.tabPosition);
-    },
+
     //右边切换
     handleClickRight(tab) {
       this.tabPosition = tab.name;
-      this.getList(this.activeName, this.pageNum,this.tabPosition);
+      this.pageSize = 1
+      this.getList();
     },
-    goodChang(v) {
-      this.getList(this.activeName, this.pageNum, v, this.tabPosition);
-    },
+
     //列表方法
-    getList(name, pageNum, goodType, tabPosition) {
+    getList() {
+      console.log(this.pageSize)
       axios
         .get("http://43.254.55.231:8080/api/cate/detail", {
           params: {
              goodsType: this.$route.query.goodsType,
             current_page: this.pageSize,
             page_size: this.pageNum,
-            type: this.activeName,
+            type: this.$route.query.type,
             sort_field: this.tabPosition,
           },
         })
         .then((res) => {
-          console.log(res)
                this.goodsName = res.data.data.goods_type
             this.tableData = res.data.data.list.list;
             this.total = res.data.data.list.total;
@@ -156,7 +150,7 @@ export default {
     //翻页
     handleCurrentChange(v) {
       this.pageSize = v;
-      this.getList(this.activeName, v, this.tabPosition);
+      this.getList();
     },
   },
 };
