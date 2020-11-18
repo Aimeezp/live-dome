@@ -365,12 +365,20 @@ type: this.$route.query.name,
         },
         xAxis: {
           type: "category",
-          axisLabel: {
-            interval: 0,
-            textStyle: {
-              // fontSize: "6",
-            },
-          },
+          // axisLabel: {
+          //   interval: 0,
+          //   textStyle: {
+          //     // fontSize: "6",
+          //   },
+          // },
+              axisLabel:{
+                  interval:0,
+                  rotate:45,//倾斜度 -90 至 90 默认为0
+                  textStyle:{
+                    // fontWeight:"bolder",
+                    // color:"#000000"
+                  }
+                },
           axisTick: {
             show: false, //不显示坐标轴刻度线
           },
@@ -491,12 +499,20 @@ type: this.$route.query.name,
             show: false, //不显示坐标轴线
           },
           type: "category",
-          axisLabel: {
-            interval: 0,
-            textStyle: {
-              // fontSize: "6",
-            },
-          },
+          // axisLabel: {
+          //   interval: 0,
+          //   textStyle: {
+          //     // fontSize: "6",
+          //   },
+          // },
+              axisLabel:{
+                  interval:0,
+                  rotate:45,//倾斜度 -90 至 90 默认为0
+                  textStyle:{
+                    // fontWeight:"bolder",
+                    // color:"#000000"
+                  }
+                },
           splitLine: {
             show: false,
           },
@@ -611,12 +627,20 @@ type: this.$route.query.name,
         },
         xAxis: {
           type: "category",
-          axisLabel: {
-            interval: 0,
-            textStyle: {
-              // fontSize: "6",
-            },
-          },
+          // axisLabel: {
+          //   interval: 0,
+          //   textStyle: {
+          //     // fontSize: "6",
+          //   },
+          // },
+              axisLabel:{
+                  interval:0,
+                  rotate:45,//倾斜度 -90 至 90 默认为0
+                  textStyle:{
+                    // fontWeight:"bolder",
+                    // color:"#000000"
+                  }
+                },
           axisTick: {
             show: false, //不显示坐标轴刻度线
           },
@@ -733,12 +757,20 @@ type: this.$route.query.name,
         },
         xAxis: {
           type: "category",
-          axisLabel: {
-            interval: 0,
-            textStyle: {
-              // fontSize: "6",
-            },
-          },
+          // axisLabel: {
+          //   interval: 0,
+          //   textStyle: {
+          //     // fontSize: "6",
+          //   },
+          // },
+              axisLabel:{
+                  interval:0,
+                  rotate:45,//倾斜度 -90 至 90 默认为0
+                  textStyle:{
+                    // fontWeight:"bolder",
+                    // color:"#000000"
+                  }
+                },
           axisTick: {
             show: false, //不显示坐标轴刻度线
           },
